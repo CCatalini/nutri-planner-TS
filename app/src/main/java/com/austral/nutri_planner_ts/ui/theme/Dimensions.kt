@@ -1,0 +1,45 @@
+package com.austral.nutri_planner_ts.ui.theme
+
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
+object Dimensions {
+    // Padding
+    val PaddingSmall = 8.dp
+    val PaddingMedium = 16.dp
+    val PaddingLarge = 24.dp
+
+    // Spacing
+    val SpacerTiny = 4.dp
+    val SpacerSmall = 8.dp
+    val SpacerMedium = 16.dp
+    val SpacerLarge = 24.dp
+
+    // Corner Radius
+    val CornerRadiusSmall = 15.dp
+    val CornerRadiusMedium = 25.dp
+    val CornerRadiusLarge = 50.dp //
+
+    // Icon and Image Sizes
+    val IconSizeSmall = 16.dp
+    val IconSizeMedium = 24.dp
+    val IconSizeLarge = 32.dp
+    val MealImageSize = 80.dp
+    val ProgressIndicatorSize = 72.dp
+
+    // Heights
+    val HeightSmall = 4.dp
+    val HeightMedium = 8.dp
+    val HeightLarge = 12.dp
+
+    // Font Sizes
+    val FontSmall = 12.sp
+    val FontMedium = 14.sp
+    val FontLarge = 16.sp
+    val FontExtraLarge = 20.sp
+
+    // Elevations
+    val ElevationSmall = 3.dp
+    val ElevationMedium = 4.dp
+
+}
