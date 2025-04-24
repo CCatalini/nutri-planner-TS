@@ -14,6 +14,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 
 
 sealed class RecipesUiState {
@@ -25,27 +27,42 @@ sealed class RecipesUiState {
 @HiltViewModel
 class RecipesViewModel @Inject constructor(
     private val apiServiceImpl: ApiServiceImpl,
-    @ApplicationContext private val context: Context, // <-- INYECTAR CONTEXTO
+    @ApplicationContext private val context: Context,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<RecipesUiState>(RecipesUiState.Loading)
     val uiState: StateFlow<RecipesUiState> = _uiState
 
+    private val _searchQuery = MutableStateFlow("")
+    val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
+
+    private var searchJob: Job? = null
+
     private val baseUrl by lazy {
-        context.getString(R.string.nutritionix_url) // <-- OBTENER EL STRING REAL
+        context.getString(R.string.nutritionix_url)
     }
 
     init {
         loadRecipes()
     }
 
-    fun retry() = loadRecipes()
+    fun onSearchQueryChange(query: String) {
+        _searchQuery.value = query
+        searchJob?.cancel()
+        searchJob = viewModelScope.launch {
+            delay(500) // Debounce search
+            loadRecipes(query)
+        }
+    }
 
-    private fun loadRecipes() {
+    fun retry() = loadRecipes(_searchQuery.value)
+
+    private fun loadRecipes(query: String = "") {
         _uiState.value = RecipesUiState.Loading
 
         apiServiceImpl.getRecipe(
             baseUrl = baseUrl,
+            query = query.ifEmpty { "apple" },
             onSuccess = { recipes ->
                 viewModelScope.launch {
                     _uiState.emit(RecipesUiState.Success(recipes))

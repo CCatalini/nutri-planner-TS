@@ -11,6 +11,7 @@ class ApiServiceImpl @Inject constructor() {
 
     fun getRecipe(
         baseUrl: String,
+        query: String = "apple",
         onSuccess: (List<CommonFood>) -> Unit,
         onFail: () -> Unit,
         loadingFinished: () -> Unit
@@ -26,7 +27,7 @@ class ApiServiceImpl @Inject constructor() {
             .build()
 
         val service: ApiService = retrofit.create(ApiService::class.java)
-        val call = service.getRecipe("apple")
+        val call = service.getRecipe(query)
 
         call.enqueue(object : Callback<RecipeResponse> {
             override fun onResponse(
