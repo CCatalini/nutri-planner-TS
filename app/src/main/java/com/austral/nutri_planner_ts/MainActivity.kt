@@ -12,6 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.compose.rememberNavController
+import com.austral.nutri_planner_ts.navigation.BottomBar
+import com.austral.nutri_planner_ts.navigation.NavHostComposable
 import com.austral.nutri_planner_ts.ui.theme.NutriplannerTSTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,7 +25,13 @@ class MainActivity : FragmentActivity() {
         enableEdgeToEdge()
         setContent {
             NutriplannerTSTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                val navController = rememberNavController()
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    bottomBar = { BottomBar(navController::navigate)
+                    }
+                ) { innerPadding ->
+                    NavHostComposable(innerPadding, navController)
                     Greeting(
                         name = "Android",
                         modifier = Modifier.padding(innerPadding)
