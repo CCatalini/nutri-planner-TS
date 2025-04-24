@@ -8,6 +8,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.composable
+import com.austral.nutri_planner_ts.api.Api
 import com.austral.nutri_planner_ts.ui.screens.day.Day
 import com.austral.nutri_planner_ts.ui.screens.profile.Profile
 import com.austral.nutri_planner_ts.ui.screens.recipe.Recipes
@@ -19,12 +20,15 @@ import com.austral.nutri_planner_ts.ui.theme.Dimensions.PaddingLarge
 fun NavHostComposable(innerPadding: PaddingValues, navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = ScreenNames.Day.name,
+        startDestination = ScreenNames.API.name,
         modifier = Modifier
             .fillMaxSize()
             .padding(innerPadding)
             .padding(PaddingLarge)
     ){
+        composable(route = ScreenNames.API.name) {
+            Api()
+        }
         composable(route = ScreenNames.Day.name) {
             Day()
         }

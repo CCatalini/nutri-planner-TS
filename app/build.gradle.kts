@@ -55,6 +55,7 @@ dependencies {
     //Hilt
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
     implementation("com.google.dagger:hilt-android:2.49")
+    implementation(libs.androidx.lifecycle.runtime.compose.android)
     kapt("com.google.dagger:hilt-android-compiler:2.44")
 
     // Retrofit

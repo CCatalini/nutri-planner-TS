@@ -4,6 +4,7 @@ enum class ScreenNames {
     Day,
     Week,
     Recipes,
-    Profile
+    Profile,
+    API
 
 }
