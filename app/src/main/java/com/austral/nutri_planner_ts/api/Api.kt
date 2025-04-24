@@ -23,7 +23,7 @@ import com.austral.nutri_planner_ts.ui.components.RecipeCard
 @Composable
 fun Api() {
     val viewModel = hiltViewModel<ApiViewModel>()
-    val characters by viewModel.recipes.collectAsStateWithLifecycle()
+    val recipes by viewModel.recipes.collectAsStateWithLifecycle()
     val loading by viewModel.loading.collectAsStateWithLifecycle()
     val retry by viewModel.showRetry.collectAsStateWithLifecycle()
 
@@ -48,7 +48,7 @@ fun Api() {
                 )
             }
         } else {
-            characters.forEach {
+            recipes.forEach {
                 RecipeCard(food = it)
             }
         }
