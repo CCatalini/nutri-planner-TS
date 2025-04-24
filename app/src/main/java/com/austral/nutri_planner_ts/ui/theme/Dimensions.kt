@@ -6,6 +6,7 @@ import androidx.compose.ui.unit.sp
 object Dimensions {
     // Padding
     val PaddingSmall = 8.dp
+    val PaddingSmallMed = 12.dp
     val PaddingMedium = 16.dp
     val PaddingLarge = 24.dp
 
@@ -31,6 +32,7 @@ object Dimensions {
     val HeightSmall = 4.dp
     val HeightMedium = 8.dp
     val HeightLarge = 12.dp
+    val HeightBar = 48.dp
 
     // Font Sizes
     val FontSmall = 12.sp
@@ -38,8 +40,10 @@ object Dimensions {
     val FontLarge = 16.sp
     val FontExtraLarge = 20.sp
 
-    // Elevations
-    val ElevationSmall = 3.dp
-    val ElevationMedium = 4.dp
+    // sizes
+    val Tiny = 1.dp
+    val Small = 2.dp
+    val Medium = 3.dp
+    val Large = 4.dp
 
 }

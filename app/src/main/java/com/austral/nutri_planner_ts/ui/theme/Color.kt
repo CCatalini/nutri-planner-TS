@@ -5,7 +5,9 @@ import androidx.compose.ui.graphics.Color
 val principal_green = Color(0xFF00D095)
 
 val background_light = Color(0xFFF7FFF7)
-val secondary_light = Color(0xFFD1E7D3)
+// DFF7E2
+val secondary_light = Color(0xFFDFF7E2)
+
 
 val background_dark = Color(0xE2011517)
 val secondary_dark = Color(0xFF0E3E3E)
