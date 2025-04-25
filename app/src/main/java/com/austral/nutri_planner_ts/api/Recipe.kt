@@ -8,6 +8,11 @@ data class CommonFood(
     val food_name: String,
     val serving_unit: String,
     val tag_id: String,
+    val photo: Photo
+)
+
+data class Photo(
+    val thumb: String
 )
 
 data class RecipeResponse(

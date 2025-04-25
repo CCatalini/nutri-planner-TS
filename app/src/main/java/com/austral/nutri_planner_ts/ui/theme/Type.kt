@@ -1,46 +1,46 @@
 package com.austral.nutri_planner_ts.ui.theme
 
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Typography
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import com.austral.nutri_planner_ts.R
 
 val Typography = Typography(
-    // Title Styles
-    headlineLarge = TextStyle(
-        fontSize = Dimensions.FontExtraLarge,
-        fontWeight = FontWeight.Bold
-    ),
-    headlineMedium = TextStyle(
-        fontSize = Dimensions.FontLarge,
-        fontWeight = FontWeight.SemiBold
-    ),
 
-    // Body Styles
-    bodyLarge = TextStyle(
-        fontSize = Dimensions.FontLarge,
-        fontWeight = FontWeight.Normal
-    ),
-    bodyMedium = TextStyle(
-        fontSize = Dimensions.FontMedium,
-        fontWeight = FontWeight.Normal
+    //  Small Style
+    titleSmall = TextStyle(
+        fontSize = Dimensions.FontSmall,
+        fontWeight = FontWeight(500),
     ),
     bodySmall = TextStyle(
         fontSize = Dimensions.FontSmall,
-        fontWeight = FontWeight.Normal
+        fontWeight = FontWeight(400),
     ),
 
-    // Label Styles
-    labelLarge = TextStyle(
-        fontSize = Dimensions.FontLarge,
-        fontWeight = FontWeight.Medium
-    ),
-    labelMedium = TextStyle(
+    // Medium style
+    titleMedium = TextStyle(
         fontSize = Dimensions.FontMedium,
-        fontWeight = FontWeight.Medium
+        fontWeight = FontWeight(500),
     ),
-    labelSmall = TextStyle(
-        fontSize = Dimensions.FontSmall,
-        fontWeight = FontWeight.Medium
+    bodyMedium = TextStyle(
+        fontSize = Dimensions.FontMedium,
+        fontWeight = FontWeight(400),
     ),
+
+    // Large Style
+    titleLarge = TextStyle(
+        fontSize = Dimensions.FontLarge,
+        fontWeight = FontWeight(500),
+    ),
+    bodyLarge = TextStyle(
+        fontSize = Dimensions.FontLarge,
+        fontWeight = FontWeight(400),
+    ),
+
 )
+

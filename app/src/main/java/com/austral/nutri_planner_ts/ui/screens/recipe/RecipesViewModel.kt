@@ -60,18 +60,47 @@ class RecipesViewModel @Inject constructor(
     private fun loadRecipes(query: String = "") {
         _uiState.value = RecipesUiState.Loading
 
-        apiServiceImpl.getRecipe(
-            baseUrl = baseUrl,
-            query = query.ifEmpty { "apple" },
-            onSuccess = { recipes ->
-                viewModelScope.launch {
-                    _uiState.emit(RecipesUiState.Success(recipes))
+        viewModelScope.launch {
+            if (query.isNotEmpty()) {
+                apiServiceImpl.getRecipe(
+                    baseUrl = baseUrl,
+                    query = query,
+                    onSuccess = { recipes ->
+                        _uiState.value = RecipesUiState.Success(recipes)
+                    },
+                    onFail = {
+                        _uiState.value = RecipesUiState.Error
+                    },
+                    loadingFinished = { }
+                )
+            } else {
+                val queries = listOf("pasta", "beef", "burger", "salad", "fish", "rice", "apple")
+                val collectedRecipes = mutableListOf<CommonFood>()
+
+                var completed = 0
+
+                queries.forEach { food ->
+                    apiServiceImpl.getRecipe(
+                        baseUrl = baseUrl,
+                        query = food,
+                        onSuccess = { recipes ->
+                            recipes.firstOrNull()?.let { collectedRecipes.add(it) }
+                            completed++
+                            if (completed == queries.size) {
+                                _uiState.value = RecipesUiState.Success(collectedRecipes)
+                            }
+                        },
+                        onFail = {
+                            completed++
+                            if (completed == queries.size) {
+                                _uiState.value = RecipesUiState.Success(collectedRecipes)
+                            }
+                        },
+                        loadingFinished = { }
+                    )
                 }
-            },
-            onFail = {
-                _uiState.value = RecipesUiState.Error
-            },
-            loadingFinished = { }
-        )
+            }
+        }
     }
+
 }

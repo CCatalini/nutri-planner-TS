@@ -5,7 +5,7 @@ import androidx.compose.ui.unit.sp
 
 object Dimensions {
     // Padding
-    val PaddingSmall = 8.dp
+    val PaddingSmall = 4.dp
     val PaddingSmallMed = 12.dp
     val PaddingMedium = 16.dp
     val PaddingLarge = 24.dp
@@ -27,6 +27,15 @@ object Dimensions {
     val IconSizeLarge = 32.dp
     val MealImageSize = 80.dp
     val ProgressIndicatorSize = 72.dp
+    val CardImageWidthList = 267.dp
+    val CardImageHeightList = 187.dp
+
+    val CardImageWidthDairy = 170.dp
+    val CardImageHeightDairy = 93.dp
+
+    val CardImageWidthSmall = 136.dp
+    val CardImageHeightSmall = 118.dp
+
 
     // Heights
     val HeightSmall = 4.dp
@@ -37,7 +46,7 @@ object Dimensions {
     // Font Sizes
     val FontSmall = 12.sp
     val FontMedium = 14.sp
-    val FontLarge = 16.sp
+    val FontLarge = 18.sp
     val FontExtraLarge = 20.sp
 
     // sizes
@@ -48,9 +57,14 @@ object Dimensions {
     val Large = 4.dp
 
     // cards
-    val CardWidthSmall = 168.dp
-    val CardHeightSmall = 180.dp
-    val CardHeightDairy = 134.dp
+    val CardWidthSmall = 156.dp
+    val CardHeightSmall = 60.dp
+    val CardMinHeightSmall = 60.dp
+
+    val CardHeightDairy = 170.dp
+    val CardWidthDairy = 170.dp
+
+
     val CardWidthList = 343.dp
     val CardHeightList = 358.dp
 

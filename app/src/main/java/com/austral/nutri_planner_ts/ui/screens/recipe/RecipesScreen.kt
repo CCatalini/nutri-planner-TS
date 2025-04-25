@@ -70,7 +70,7 @@ fun Recipes() {
             }
             is RecipesUiState.Success -> {
                 uiState.recipes.forEach {
-                    RecipeCard(food = it, RecipeCardVariant.Dairy)
+                    RecipeCard(food = it, RecipeCardVariant.Small)
                 }
             }
         }
