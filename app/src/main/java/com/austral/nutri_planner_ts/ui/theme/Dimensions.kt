@@ -40,6 +40,7 @@ object Dimensions {
     val HeightLarge = 12.dp
     val HeightBar = 48.dp
     val HeightMacroBar = 64.dp
+    val CircularProgressIndicator = 48.dp
 
     // Font Sizes
     val FontSmall = 12.sp

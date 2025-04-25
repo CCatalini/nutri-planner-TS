@@ -30,5 +30,8 @@
     <string name="button_eaten">Eaten</string>
     <string name="button_mark">Mark</string>
     <string name="button_swap">Swap</string>
+
+
     <string name="button_add_meal">Add meal</string>
+    <string name="meals">Meals</string>
 </resources>

@@ -9,9 +9,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.austral.nutri_planner_ts.api.CommonFood
 import com.austral.nutri_planner_ts.ui.theme.Dimensions
@@ -52,7 +49,8 @@ fun SmallCardContent(food: CommonFood) {
                 color = MaterialTheme.colorScheme.secondary,
                 shape = RoundedCornerShape(Dimensions.CornerRadiusMedium)
             )
-            .width(Dimensions.CardWidthSmall)
+            .fillMaxWidth()
+            //.width(Dimensions.CardWidthSmall)
             .height(Dimensions.CardHeightSmall)
     ) {
         food.photo?.thumb?.let { imageUrl ->
