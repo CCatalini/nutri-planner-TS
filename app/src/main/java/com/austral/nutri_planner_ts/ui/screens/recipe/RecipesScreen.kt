@@ -5,8 +5,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
@@ -36,12 +37,11 @@ fun Recipes() {
 
     Column(
         verticalArrangement = Arrangement.spacedBy(Dimensions.SpacerMedium),
-        modifier = Modifier.verticalScroll(rememberScrollState())
+        modifier = Modifier.padding(Dimensions.PaddingMedium)
     ) {
         SearchBar(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = Dimensions.PaddingMedium)
                 .onFocusChanged { focusState ->
                     searchBarVariant = when {
                         searchQuery.isNotEmpty() -> SearchBarVariant.WITH_TEXT
@@ -69,8 +69,15 @@ fun Recipes() {
                 }
             }
             is RecipesUiState.Success -> {
-                uiState.recipes.forEach {
-                    RecipeCard(food = it, RecipeCardVariant.Medium)
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(2),
+                    verticalArrangement = Arrangement.spacedBy(Dimensions.SpacerMedium),
+                    horizontalArrangement = Arrangement.spacedBy(Dimensions.SpacerMedium),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    items(uiState.recipes) { recipe ->
+                        RecipeCard(food = recipe, RecipeCardVariant.Medium)
+                    }
                 }
             }
         }

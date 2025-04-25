@@ -74,7 +74,30 @@ class RecipesViewModel @Inject constructor(
                     loadingFinished = { }
                 )
             } else {
-                val queries = listOf("pasta", "beef", "burger", "salad", "fish", "rice", "apple")
+                // val queries = listOf("pasta", "beef", "burger", "salad", "fish", "rice", "apple")
+                val queries = listOf(
+                    "Spaghetti Carbonara",
+                    "Chicken Alfredo",
+                    "Beef Stroganoff",
+                    "Grilled Salmon",
+                 //   "Tuna Salad",
+                    "Chicken Caesar Wrap",
+                    "Shrimp Tacos",
+                    "Veggie Stir Fry",
+                    "Quinoa Bowl",
+                    "Lentil Soup",
+                    "Greek Salad",
+                    "Baked Ziti",
+                    "Teriyaki Chicken",
+                  //  "Chili Con Carne",
+                  //  "Mushroom Risotto",
+                    "Pulled Pork Sandwich",
+                  //  "Falafel Wrap",
+                    "Sweet Potato Curry",
+                    "Chicken Fajitas",
+                    "Eggplant Parmesan"
+                )
+
                 val collectedRecipes = mutableListOf<CommonFood>()
 
                 var completed = 0
