@@ -1,6 +1,5 @@
 package com.austral.nutri_planner_ts.ui.components
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -19,7 +18,7 @@ import com.austral.nutri_planner_ts.ui.theme.Dimensions
 
 enum class RecipeCardVariant {
     List,
-    Dairy,
+    Medium,
     Small
 }
 
@@ -34,44 +33,96 @@ fun RecipeCard(
     val imageModifier = getImageModifier(variant)
     val foodNameStyle = getFoodNameStyle(variant)
 
-    // Card Layout
     Card(
         modifier = cardModifier,
-       // elevation = CardDefaults.cardElevation(defaultElevation = Dimensions.Default),
         shape = RoundedCornerShape(Dimensions.CornerRadiusMedium)
     ) {
-        Column(
-         //   verticalArrangement = columnArrangement,
-        //    horizontalAlignment = columnAlignment,
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
-                .padding(Dimensions.PaddingSmall)
-        ) {
-            food.photo?.thumb?.let { imageUrl ->
-                AsyncImage(
-                    model = imageUrl,
-                    contentDescription = food.food_name,
-                    contentScale = ContentScale.Crop,
-                    modifier = imageModifier
-                )
-            }
-            Text(
-                text = food.food_name,
-                style = foodNameStyle,
-            )
-            Text(
-                text = "Serving: ${food.serving_qty} ${food.serving_unit}",
-                style = MaterialTheme.typography.bodyMedium
-            )
-            Text(
-                text = "Tag: ${food.tag_name}",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
+        when (variant) {
+            RecipeCardVariant.Small -> SmallCardContent(food)
+            RecipeCardVariant.Medium -> MediumCardContent(food)
+            else -> cardModifierUsingVariant(variant)
         }
     }
 }
+
+
+
+
+@Composable
+fun SmallCardContent(food: CommonFood) {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(Dimensions.SpacerSmall),
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .background(
+                color = MaterialTheme.colorScheme.secondary,
+                shape = RoundedCornerShape(Dimensions.CornerRadiusMedium)
+            )
+            .width(Dimensions.CardWidthSmall)
+            .height(Dimensions.CardHeightSmall)
+    ) {
+        food.photo?.thumb?.let { imageUrl ->
+            AsyncImage(
+                model = imageUrl,
+                contentDescription = food.food_name,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .width(Dimensions.CardImageHeightSmall)
+               //     .weight(1f) // 1/3 del espacio
+                    .clip(RoundedCornerShape(Dimensions.CornerRadiusSmall))
+            )
+        }
+
+        Text(
+            text = food.food_name,
+            style = MaterialTheme.typography.titleLarge,
+            color = MaterialTheme.colorScheme.onBackground,
+            modifier = Modifier
+                .weight(2f) // 2/3 del espacio
+                .wrapContentWidth(Alignment.CenterHorizontally)
+        )
+    }
+}
+
+
+
+
+@Composable
+fun MediumCardContent(food: CommonFood) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Top,
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.secondary, RoundedCornerShape(Dimensions.CornerRadiusMedium))
+    ) {
+        food.photo.thumb.let { imageUrl ->
+            AsyncImage(
+                model = imageUrl,
+                contentDescription = food.food_name,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .height(Dimensions.CardImageHeightMedium)
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(Dimensions.CornerRadiusSmall))
+            )
+        }
+        Spacer(modifier = Modifier.height(Dimensions.SpacerSmall))
+        Text(
+            text = food.food_name,
+            style = MaterialTheme.typography.titleLarge,
+            color = MaterialTheme.colorScheme.onBackground
+        )
+        Spacer(modifier = Modifier.height(Dimensions.SpacerTiny))
+        Text(
+            text = "${food.serving_qty} min • ${food.serving_unit} kcal",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onBackground
+        )
+    }
+}
+
 
 
 @Composable
@@ -83,9 +134,9 @@ private fun cardModifierUsingVariant(variant: RecipeCardVariant): Modifier {
             .background(MaterialTheme.colorScheme.secondary, RoundedCornerShape(Dimensions.CornerRadiusMedium))
             .padding(Dimensions.PaddingSmall)
 
-        RecipeCardVariant.Dairy -> Modifier
-            .width(Dimensions.CardWidthDairy)
-            .height(Dimensions.CardHeightDairy)
+        RecipeCardVariant.Medium -> Modifier
+            .width(Dimensions.CardWidthMedium)
+            .height(Dimensions.CardHeightMedium)
             .background(MaterialTheme.colorScheme.secondary, RoundedCornerShape(Dimensions.CornerRadiusMedium))
             .padding(Dimensions.PaddingSmall)
 
@@ -120,9 +171,9 @@ private fun getImageModifier(variant: RecipeCardVariant): Modifier {
             .width(Dimensions.CardImageWidthList)
             .height(Dimensions.CardImageHeightList)
 
-        RecipeCardVariant.Dairy -> Modifier
+        RecipeCardVariant.Medium -> Modifier
             .width(Dimensions.CardImageWidthDairy)
-            .height(Dimensions.CardImageHeightDairy)
+            .height(Dimensions.CardImageHeightMedium)
 
         RecipeCardVariant.Small -> Modifier
             .width(Dimensions.CardImageWidthSmall)
@@ -134,7 +185,7 @@ private fun getImageModifier(variant: RecipeCardVariant): Modifier {
 private fun getFoodNameStyle(variant: RecipeCardVariant): TextStyle {
     return when (variant) {
         RecipeCardVariant.List -> MaterialTheme.typography.titleLarge
-        RecipeCardVariant.Dairy -> MaterialTheme.typography.titleMedium
+        RecipeCardVariant.Medium -> MaterialTheme.typography.titleMedium
         RecipeCardVariant.Small -> MaterialTheme.typography.titleSmall
     }
 }

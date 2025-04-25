@@ -31,10 +31,9 @@ object Dimensions {
     val CardImageHeightList = 187.dp
 
     val CardImageWidthDairy = 170.dp
-    val CardImageHeightDairy = 93.dp
+    val CardImageHeightMedium = 93.dp
 
-    val CardImageWidthSmall = 136.dp
-    val CardImageHeightSmall = 118.dp
+
 
 
     // Heights
@@ -57,12 +56,16 @@ object Dimensions {
     val Large = 4.dp
 
     // cards
-    val CardWidthSmall = 156.dp
-    val CardHeightSmall = 60.dp
+    val CardWidthSmall = 180.dp
+    val CardHeightSmall = 72.dp
     val CardMinHeightSmall = 60.dp
 
-    val CardHeightDairy = 170.dp
-    val CardWidthDairy = 170.dp
+    val CardImageWidthSmall = 65.dp
+    val CardImageHeightSmall = 72.dp
+
+
+    val CardHeightMedium = 170.dp
+    val CardWidthMedium = 170.dp
 
 
     val CardWidthList = 343.dp
