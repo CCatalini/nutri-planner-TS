@@ -25,12 +25,10 @@ object Dimensions {
     val IconSizeSmall = 16.dp
     val IconSizeMedium = 24.dp
     val IconSizeLarge = 32.dp
-    val MealImageSize = 80.dp
-    val ProgressIndicatorSize = 72.dp
-    val CardImageWidthList = 267.dp
-    val CardImageHeightList = 187.dp
 
-    val CardImageWidthDairy = 170.dp
+    val ProgressIndicatorSizeLarge = 72.dp
+
+    val CardImageWidthMedium = 170.dp
     val CardImageHeightMedium = 93.dp
 
 
@@ -41,6 +39,7 @@ object Dimensions {
     val HeightMedium = 8.dp
     val HeightLarge = 12.dp
     val HeightBar = 48.dp
+    val HeightMacroBar = 64.dp
 
     // Font Sizes
     val FontSmall = 12.sp

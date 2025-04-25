@@ -19,15 +19,12 @@ import com.austral.nutri_planner_ts.ui.theme.Dimensions.PaddingLarge
 fun NavHostComposable(innerPadding: PaddingValues, navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = ScreenNames.Recipes.name,
+        startDestination = ScreenNames.Day.name,
         modifier = Modifier
             .fillMaxSize()
             .padding(innerPadding)
             .padding(PaddingLarge)
     ){
-      //  composable(route = ScreenNames.API.name) {
-     // //      Api()
-     //   }
         composable(route = ScreenNames.Day.name) { Day() }
         composable(route = ScreenNames.Week.name) { Week() }
         composable(route = ScreenNames.Recipes.name) { Recipes() }
@@ -36,9 +33,3 @@ fun NavHostComposable(innerPadding: PaddingValues, navController: NavHostControl
 }
 
 
-
-
-      //  composable(route = NutriPlannerScreen.Day.name) {
-      //      val dayViewModel: DayViewModel = viewModel()
-      //      DayScreen(viewModel = dayViewModel)
-      //  }

@@ -1,3 +1,34 @@
 <resources>
     <string name="app_name">nutri-planner-TS</string>
+
+    <!-- MacroSummary Strings -->
+    <string name="calories_label">Calories</string>
+    <string name="calories_format">%1$d\nof %2$d</string>
+    <string name="protein_label">Protein</string>
+    <string name="fat_label">Fat</string>
+    <string name="carbs_label">Carbs</string>
+    <string name="macro_value_format">%1$d / %2$d g</string>
+
+    <!-- Meal Types -->
+    <string name="meal_type_breakfast">Breakfast</string>
+    <string name="meal_type_lunch">Lunch</string>
+    <string name="meal_type_dinner">Dinner</string>
+    <string name="meal_type_snack">Snack</string>
+
+    <!-- Meal Items -->
+    <string name="meal_apple">Apple</string>
+    <string name="meal_chicken_salad">Chicken Salad</string>
+    <string name="meal_yogurt_berries">Greek Yogurt with Berries</string>
+    <string name="meal_salmon_quinoa">Grilled Salmon with Quinoa</string>
+
+    <!-- Meal Item Details -->
+    <string name="preparation_time_format">%1$d min</string>
+    <string name="calories_amount_format">%1$d calories</string>
+    <string name="time_calories_separator"> • </string>
+
+    <!-- Buttons -->
+    <string name="button_eaten">Eaten</string>
+    <string name="button_mark">Mark</string>
+    <string name="button_swap">Swap</string>
+    <string name="button_add_meal">Add meal</string>
 </resources>
