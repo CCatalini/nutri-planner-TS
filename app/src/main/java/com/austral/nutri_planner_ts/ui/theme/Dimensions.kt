@@ -18,7 +18,7 @@ object Dimensions {
 
     // Corner Radius
     val CornerRadiusSmall = 15.dp
-    val CornerRadiusMedium = 25.dp
+    val CornerRadiusMedium = 24.dp
     val CornerRadiusLarge = 50.dp //
 
     // Icon and Image Sizes
@@ -41,9 +41,17 @@ object Dimensions {
     val FontExtraLarge = 20.sp
 
     // sizes
+    val Default = 0.dp
     val Tiny = 1.dp
     val Small = 2.dp
     val Medium = 3.dp
     val Large = 4.dp
+
+    // cards
+    val CardWidthSmall = 168.dp
+    val CardHeightSmall = 180.dp
+    val CardHeightDairy = 134.dp
+    val CardWidthList = 343.dp
+    val CardHeightList = 358.dp
 
 }

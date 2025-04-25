@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.austral.nutri_planner_ts.ui.components.RecipeCard
+import com.austral.nutri_planner_ts.ui.components.RecipeCardVariant
 import com.austral.nutri_planner_ts.ui.components.SearchBar
 import com.austral.nutri_planner_ts.ui.components.SearchBarVariant
 import com.austral.nutri_planner_ts.ui.theme.Dimensions
@@ -69,7 +70,7 @@ fun Recipes() {
             }
             is RecipesUiState.Success -> {
                 uiState.recipes.forEach {
-                    RecipeCard(food = it)
+                    RecipeCard(food = it, RecipeCardVariant.Dairy)
                 }
             }
         }

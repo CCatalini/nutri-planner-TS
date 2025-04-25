@@ -20,3 +20,10 @@ val ocean_blue = Color(0xFF0068FF)
 val text1 = Color(0xFF031314)
 val text2 = Color(0xFF052224)
 val text3 = Color(0xFFE9F3EA)
+
+val col = Color(0x0F080E2D)
+
+val sporColor = Color(0x1A050B2A)
+
+val recipecar = Color(0x0F080E2D)
+val adfa = Color(0x0A080E2D)
