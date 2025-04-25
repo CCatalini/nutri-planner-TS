@@ -32,10 +32,6 @@ class MainActivity : FragmentActivity() {
                     }
                 ) { innerPadding ->
                     NavHostComposable(innerPadding, navController)
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
                 }
             }
         }
@@ -57,3 +53,4 @@ fun GreetingPreview() {
         Greeting("Android")
     }
 }
+
