@@ -17,9 +17,8 @@ import com.austral.nutri_planner_ts.api.CommonFood
 import com.austral.nutri_planner_ts.ui.theme.Dimensions
 
 enum class RecipeCardVariant {
-    List,
-    Medium,
-    Small
+    Small,
+    Medium
 }
 
 @Composable
@@ -27,20 +26,15 @@ fun RecipeCard(
     food: CommonFood,
     variant: RecipeCardVariant,
 ) {
-    val cardModifier = cardModifierUsingVariant(variant)
-    val columnArrangement = getColumnArrangement(variant)
-    val columnAlignment = getColumnAlignment(variant)
-    val imageModifier = getImageModifier(variant)
-    val foodNameStyle = getFoodNameStyle(variant)
 
     Card(
-        modifier = cardModifier,
+        modifier = Modifier
+            .padding(Dimensions.PaddingSmall),
         shape = RoundedCornerShape(Dimensions.CornerRadiusMedium)
     ) {
         when (variant) {
             RecipeCardVariant.Small -> SmallCardContent(food)
             RecipeCardVariant.Medium -> MediumCardContent(food)
-            else -> cardModifierUsingVariant(variant)
         }
     }
 }
@@ -86,15 +80,14 @@ fun SmallCardContent(food: CommonFood) {
 }
 
 
-
-
 @Composable
 fun MediumCardContent(food: CommonFood) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top,
         modifier = Modifier
-            .fillMaxSize()
+            .height(Dimensions.CardHeightMedium)
+            .width(Dimensions.CardWidthMedium)
             .background(MaterialTheme.colorScheme.secondary, RoundedCornerShape(Dimensions.CornerRadiusMedium))
     ) {
         food.photo.thumb.let { imageUrl ->
@@ -120,72 +113,5 @@ fun MediumCardContent(food: CommonFood) {
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onBackground
         )
-    }
-}
-
-
-
-@Composable
-private fun cardModifierUsingVariant(variant: RecipeCardVariant): Modifier {
-    return when (variant) {
-        RecipeCardVariant.Small -> Modifier
-            .width(Dimensions.CardWidthSmall)
-            .height(Dimensions.CardHeightSmall)
-            .background(MaterialTheme.colorScheme.secondary, RoundedCornerShape(Dimensions.CornerRadiusMedium))
-            .padding(Dimensions.PaddingSmall)
-
-        RecipeCardVariant.Medium -> Modifier
-            .width(Dimensions.CardWidthMedium)
-            .height(Dimensions.CardHeightMedium)
-            .background(MaterialTheme.colorScheme.secondary, RoundedCornerShape(Dimensions.CornerRadiusMedium))
-            .padding(Dimensions.PaddingSmall)
-
-        RecipeCardVariant.List -> Modifier
-            .fillMaxWidth()
-            .height(Dimensions.CardHeightList)
-            .background(MaterialTheme.colorScheme.secondary, RoundedCornerShape(Dimensions.CornerRadiusMedium))
-            .padding(Dimensions.PaddingSmall)
-    }
-}
-
-@Composable
-private fun getColumnArrangement(variant: RecipeCardVariant): Arrangement.Vertical {
-    return when (variant) {
-        RecipeCardVariant.List -> Arrangement.spacedBy(Dimensions.SpacerMedium, Alignment.Top)
-        else -> Arrangement.spacedBy(Dimensions.SpacerSmall, Alignment.Top)
-    }
-}
-
-@Composable
-private fun getColumnAlignment(variant: RecipeCardVariant): Alignment.Horizontal {
-    return when (variant) {
-        RecipeCardVariant.List -> Alignment.CenterHorizontally
-        else -> Alignment.Start
-    }
-}
-
-@Composable
-private fun getImageModifier(variant: RecipeCardVariant): Modifier {
-    return when (variant) {
-        RecipeCardVariant.List -> Modifier
-            .width(Dimensions.CardImageWidthList)
-            .height(Dimensions.CardImageHeightList)
-
-        RecipeCardVariant.Medium -> Modifier
-            .width(Dimensions.CardImageWidthDairy)
-            .height(Dimensions.CardImageHeightMedium)
-
-        RecipeCardVariant.Small -> Modifier
-            .width(Dimensions.CardImageWidthSmall)
-            .height(Dimensions.CardImageHeightSmall)
-    }.clip(RoundedCornerShape(Dimensions.CornerRadiusSmall))
-}
-
-@Composable
-private fun getFoodNameStyle(variant: RecipeCardVariant): TextStyle {
-    return when (variant) {
-        RecipeCardVariant.List -> MaterialTheme.typography.titleLarge
-        RecipeCardVariant.Medium -> MaterialTheme.typography.titleMedium
-        RecipeCardVariant.Small -> MaterialTheme.typography.titleSmall
     }
 }
