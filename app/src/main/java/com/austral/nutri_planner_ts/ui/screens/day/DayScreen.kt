@@ -53,8 +53,8 @@ fun Day() {
                     verticalArrangement = Arrangement.spacedBy(Dimensions.SpacerMedium),
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    items(uiState.meals) { food ->
-                        RecipeCard(food = food, variant = RecipeCardVariant.Small)
+                    items(uiState.meals) { ingredient ->
+                        RecipeCard(ingredient = ingredient, variant = RecipeCardVariant.Small)
                     }
                 }
             }

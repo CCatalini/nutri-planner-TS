@@ -1,3 +1,3 @@
 <resources>
-    <string name="nutritionix_url">https://trackapi.nutritionix.com</string>
+    <string name="spoonacular_url">https://api.spoonacular.com/</string>
 </resources>

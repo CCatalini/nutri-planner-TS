@@ -3,7 +3,7 @@ package com.austral.nutri_planner_ts.ui.screens.day
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.austral.nutri_planner_ts.api.CommonFood
+import com.austral.nutri_planner_ts.api.IngredientSearchResult
 import com.austral.nutri_planner_ts.api.manager.ApiServiceImpl
 import com.austral.nutri_planner_ts.R
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 sealed class DayUiState {
     data object Loading : DayUiState()
-    data class Success(val meals: List<CommonFood>) : DayUiState()
+    data class Success(val meals: List<IngredientSearchResult>) : DayUiState()
     data object Error : DayUiState()
 }
 
@@ -30,7 +30,7 @@ class DayViewModel @Inject constructor(
     val uiState: StateFlow<DayUiState> = _uiState.asStateFlow()
 
     private val baseUrl by lazy {
-        context.getString(R.string.nutritionix_url)
+        context.getString(R.string.spoonacular_url)
     }
 
     init {
@@ -45,17 +45,17 @@ class DayViewModel @Inject constructor(
         _uiState.value = DayUiState.Loading
 
         viewModelScope.launch {
-            val queries = listOf("Potato eggs scramble", "Teriyaki Chicken", "Veggie Stir Fry")
+            // Meal-focused ingredient searches for the day
+            val queries = listOf("egg", "chicken", "broccoli")
 
-            val meals = mutableListOf<CommonFood>()
+            val meals = mutableListOf<IngredientSearchResult>()
             var completed = 0
 
             queries.forEach { meal ->
-                apiServiceImpl.getRecipe(
-                    baseUrl = baseUrl,
+                apiServiceImpl.searchIngredients(
                     query = meal,
-                    onSuccess = { foods ->
-                        foods.firstOrNull()?.let { meals.add(it) }
+                    onSuccess = { ingredients ->
+                        ingredients.firstOrNull()?.let { meals.add(it) }
                         completed++
                         if (completed == queries.size) {
                             _uiState.value = DayUiState.Success(meals)

@@ -31,7 +31,7 @@ import com.austral.nutri_planner_ts.ui.theme.Dimensions
 fun Recipes() {
     val viewModel = hiltViewModel<RecipesViewModel>()
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
-    val searchQuery = viewModel.searchQuery.collectAsStateWithLifecycle().value
+    var searchQuery by remember { mutableStateOf("") }
     var searchBarVariant by remember { mutableStateOf(SearchBarVariant.DEFAULT) }
 
     Column(
@@ -48,10 +48,16 @@ fun Recipes() {
                         else -> SearchBarVariant.DEFAULT
                     }
                 },
-            hint = "Search recipes...",
+            hint = "Search ingredients...",
             variant = searchBarVariant,
-            onValueChange = viewModel::onSearchQueryChange,
-            onClear = { viewModel.onSearchQueryChange("") }
+            onValueChange = { query ->
+                searchQuery = query
+                viewModel.searchIngredients(query)
+            },
+            onClear = { 
+                searchQuery = ""
+                viewModel.searchIngredients("")
+            }
         )
 
         when (uiState) {
@@ -74,8 +80,8 @@ fun Recipes() {
                     horizontalArrangement = Arrangement.spacedBy(Dimensions.SpacerMedium),
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    items(uiState.recipes) { recipe ->
-                        RecipeCard(food = recipe, RecipeCardVariant.Medium)
+                    items(uiState.ingredients) { ingredient ->
+                        RecipeCard(ingredient = ingredient, RecipeCardVariant.Medium)
                     }
                 }
             }

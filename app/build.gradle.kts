@@ -27,8 +27,7 @@ android {
             localProperties.load(localPropertiesFile.inputStream())
         }
 
-        buildConfigField("String", "NUTRITIONIX_APP_ID", "\"${localProperties.getProperty("nutritionix.app.id", "")}\"")
-        buildConfigField("String", "NUTRITIONIX_APP_KEY", "\"${localProperties.getProperty("nutritionix.app.key", "")}\"")
+        buildConfigField("String", "SPOONACULAR_API_KEY", "\"${localProperties.getProperty("spoonacular.api.key", "")}\"")
     }
 
     buildTypes {

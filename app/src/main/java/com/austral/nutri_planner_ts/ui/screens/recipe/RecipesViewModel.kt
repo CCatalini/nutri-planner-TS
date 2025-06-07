@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.austral.nutri_planner_ts.BuildConfig
 import com.austral.nutri_planner_ts.R
-import com.austral.nutri_planner_ts.api.CommonFood
+import com.austral.nutri_planner_ts.api.IngredientSearchResult
 import com.austral.nutri_planner_ts.api.manager.ApiServiceImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -20,7 +20,7 @@ import kotlinx.coroutines.delay
 
 sealed class RecipesUiState {
     data object Loading : RecipesUiState()
-    data class Success(val recipes: List<CommonFood>) : RecipesUiState()
+    data class Success(val ingredients: List<IngredientSearchResult>) : RecipesUiState()
     data object Error : RecipesUiState()
 }
 
@@ -31,42 +31,34 @@ class RecipesViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<RecipesUiState>(RecipesUiState.Loading)
-    val uiState: StateFlow<RecipesUiState> = _uiState
+    val uiState: StateFlow<RecipesUiState> = _uiState.asStateFlow()
 
-    private val _searchQuery = MutableStateFlow("")
-    val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
+    private val baseUrl by lazy {
+        context.getString(R.string.spoonacular_url)
+    }
 
     private var searchJob: Job? = null
 
-    private val baseUrl by lazy {
-        context.getString(R.string.nutritionix_url)
-    }
-
     init {
-        loadRecipes()
+        searchIngredients("")
     }
 
-    fun onSearchQueryChange(query: String) {
-        _searchQuery.value = query
+    fun retry() {
+        searchIngredients("")
+    }
+
+    fun searchIngredients(query: String) {
         searchJob?.cancel()
-        searchJob = viewModelScope.launch {
-            delay(500) // Debounce search
-            loadRecipes(query)
-        }
-    }
-
-    fun retry() = loadRecipes(_searchQuery.value)
-
-    private fun loadRecipes(query: String = "") {
         _uiState.value = RecipesUiState.Loading
 
-        viewModelScope.launch {
+        searchJob = viewModelScope.launch {
+            delay(300) // Debounce
+            
             if (query.isNotEmpty()) {
-                apiServiceImpl.getRecipe(
-                    baseUrl = baseUrl,
+                apiServiceImpl.searchIngredients(
                     query = query,
-                    onSuccess = { recipes ->
-                        _uiState.value = RecipesUiState.Success(recipes)
+                    onSuccess = { ingredients ->
+                        _uiState.value = RecipesUiState.Success(ingredients)
                     },
                     onFail = {
                         _uiState.value = RecipesUiState.Error
@@ -74,49 +66,30 @@ class RecipesViewModel @Inject constructor(
                     loadingFinished = { }
                 )
             } else {
-                // val queries = listOf("pasta", "beef", "burger", "salad", "fish", "rice", "apple")
+                // Popular ingredient queries for initial display
                 val queries = listOf(
-                    "Spaghetti Carbonara",
-                    "Chicken Alfredo",
-                    "Beef Stroganoff",
-                    "Grilled Salmon",
-                 //   "Tuna Salad",
-                    "Chicken Caesar Wrap",
-                    "Shrimp Tacos",
-                    "Veggie Stir Fry",
-                    "Quinoa Bowl",
-                    "Lentil Soup",
-                    "Greek Salad",
-                    "Baked Ziti",
-                    "Teriyaki Chicken",
-                  //  "Chili Con Carne",
-                  //  "Mushroom Risotto",
-                    "Pulled Pork Sandwich",
-                  //  "Falafel Wrap",
-                    "Sweet Potato Curry",
-                    "Chicken Fajitas",
-                    "Eggplant Parmesan"
+                    "chicken", "beef", "salmon", "rice", "pasta",
+                    "tomato", "onion", "garlic", "apple", "banana",
+                    "cheese", "milk", "egg", "potato", "carrot"
                 )
 
-                val collectedRecipes = mutableListOf<CommonFood>()
-
+                val collectedIngredients = mutableListOf<IngredientSearchResult>()
                 var completed = 0
 
-                queries.forEach { food ->
-                    apiServiceImpl.getRecipe(
-                        baseUrl = baseUrl,
-                        query = food,
-                        onSuccess = { recipes ->
-                            recipes.firstOrNull()?.let { collectedRecipes.add(it) }
+                queries.forEach { ingredient ->
+                    apiServiceImpl.searchIngredients(
+                        query = ingredient,
+                        onSuccess = { ingredients ->
+                            ingredients.firstOrNull()?.let { collectedIngredients.add(it) }
                             completed++
                             if (completed == queries.size) {
-                                _uiState.value = RecipesUiState.Success(collectedRecipes)
+                                _uiState.value = RecipesUiState.Success(collectedIngredients)
                             }
                         },
                         onFail = {
                             completed++
                             if (completed == queries.size) {
-                                _uiState.value = RecipesUiState.Success(collectedRecipes)
+                                _uiState.value = RecipesUiState.Success(collectedIngredients)
                             }
                         },
                         loadingFinished = { }
@@ -125,5 +98,4 @@ class RecipesViewModel @Inject constructor(
             }
         }
     }
-
 }
