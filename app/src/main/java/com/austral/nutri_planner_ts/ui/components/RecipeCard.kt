@@ -1,105 +1,181 @@
 package com.austral.nutri_planner_ts.ui.components
 
-import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.util.trace
+import android.util.Log
 import coil.compose.AsyncImage
+import com.austral.nutri_planner_ts.R
 import com.austral.nutri_planner_ts.api.IngredientSearchResult
+import com.austral.nutri_planner_ts.api.IngredientInformation
 import com.austral.nutri_planner_ts.ui.theme.Dimensions
-
-enum class RecipeCardVariant {
-    Small,
-    Medium
-}
 
 @Composable
 fun RecipeCard(
     ingredient: IngredientSearchResult,
-    variant: RecipeCardVariant,
-) {
-
+    nutritionInfo: IngredientInformation?,
+    showDeleteButton: Boolean = false,
+    onDeleteClick: (() -> Unit)? = null
+) = trace("RecipeCard") {
+    var showDetailDialog by remember { mutableStateOf(false) }
+    val isRecipe = ingredient.image.startsWith("http")
+    
     Card(
         modifier = Modifier
-            .padding(Dimensions.PaddingSmall),
-        shape = RoundedCornerShape(Dimensions.CornerRadiusMedium)
+            .fillMaxWidth()
+            .height(Dimensions.DayCardHeight)
+            .clickable { showDetailDialog = true },
+        shape = RoundedCornerShape(Dimensions.CornerRadiusMedium),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondary,
+            contentColor = MaterialTheme.colorScheme.onSecondary
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = Dimensions.CardElevation)
     ) {
-        when (variant) {
-            RecipeCardVariant.Small -> SmallCardContent(ingredient)
-            RecipeCardVariant.Medium -> MediumCardContent(ingredient)
+        Box(modifier = Modifier.fillMaxSize()) {
+            Column(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                // Large prominent image like first reference image
+                AsyncImage(
+                    model = buildImageUrl(ingredient),
+                    contentDescription = ingredient.name,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(Dimensions.DayCardImageHeight)
+                        .clip(
+                            RoundedCornerShape(
+                                topStart = Dimensions.CornerRadiusMedium,
+                                topEnd = Dimensions.CornerRadiusMedium,
+                                bottomStart = Dimensions.DayCardImageCornerRadius,
+                                bottomEnd = Dimensions.DayCardImageCornerRadius
+                            )
+                        ),
+                    contentScale = ContentScale.Crop
+                )
+                
+                // Content section
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(Dimensions.DayCardPadding),
+                    verticalArrangement = Arrangement.spacedBy(Dimensions.SpacerSmall)
+                ) {
+                    // Title - Larger text
+                    Text(
+                        text = ingredient.name,
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onSecondary,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis,
+                        textAlign = TextAlign.Start
+                    )
+                    
+                    // Nutrition info if available - Reorganized layout
+                    if (nutritionInfo != null) {
+                        val calories = nutritionInfo.nutrition?.nutrients?.find { it.name == "Calories" }?.amount?.toInt() ?: 0
+                        
+                        // Calories on left, Recipe indicator on right
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = "${calories} cal",
+                                style = MaterialTheme.typography.bodyLarge,
+                                color = MaterialTheme.colorScheme.onSecondary.copy(alpha = 0.8f)
+                            )
+                            if (isRecipe) {
+                                Text(
+                                    text = stringResource(R.string.food_category_recipe),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+                            }
+                        }
+                    } else if (isRecipe) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.End
+                        ) {
+                            Text(
+                                text = stringResource(R.string.food_category_recipe),
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                        }
+                    }
+                }
+            }
+            
+            // Delete button overlay
+            if (showDeleteButton && onDeleteClick != null) {
+                IconButton(
+                    onClick = onDeleteClick,
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+                        .padding(Dimensions.SpacerSmall)
+                        .size(Dimensions.IconSizeLarge)
+                ) {
+                    Card(
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.primary,
+                            contentColor = MaterialTheme.colorScheme.onPrimary
+                        ),
+                        shape = RoundedCornerShape(Dimensions.CornerRadiusLarge)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Close,
+                            contentDescription = stringResource(R.string.content_description_remove_meal),
+                            modifier = Modifier
+                                .padding(Dimensions.SpacerSmall)
+                                .size(Dimensions.IconSizeSmall)
+                        )
+                    }
+                }
+            }
         }
     }
+    
+    // Show detail dialog when card is clicked
+    FoodDetailDialog(
+        isVisible = showDetailDialog,
+        foodItem = ingredient,
+        nutritionInfo = nutritionInfo,
+        onDismiss = { showDetailDialog = false }
+    )
 }
 
-@Composable
-fun SmallCardContent(ingredient: IngredientSearchResult) {
-    Row(
-        horizontalArrangement = Arrangement.spacedBy(Dimensions.SpacerSmall),
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-            .background(
-                color = MaterialTheme.colorScheme.secondary,
-                shape = RoundedCornerShape(Dimensions.CornerRadiusMedium)
-            )
-            .fillMaxWidth()
-            .height(Dimensions.CardHeightSmall)
-    ) {
-        AsyncImage(
-            model = "https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}",
-            contentDescription = ingredient.name,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .fillMaxHeight()
-                .width(Dimensions.CardImageHeightSmall)
-                .clip(RoundedCornerShape(Dimensions.CornerRadiusSmall))
-        )
-
-        Text(
-            text = ingredient.name,
-            style = MaterialTheme.typography.titleLarge,
-            color = MaterialTheme.colorScheme.onBackground,
-            modifier = Modifier
-                .weight(2f)
-                .wrapContentWidth(Alignment.CenterHorizontally)
-        )
-    }
-}
-
-@Composable
-fun MediumCardContent(ingredient: IngredientSearchResult) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Top,
-        modifier = Modifier
-            .height(Dimensions.CardHeightMedium)
-            .width(Dimensions.CardWidthMedium)
-            .background(MaterialTheme.colorScheme.secondary, RoundedCornerShape(Dimensions.CornerRadiusMedium))
-    ) {
-        AsyncImage(
-            model = "https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}",
-            contentDescription = ingredient.name,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .height(Dimensions.CardImageHeightMedium)
-                .fillMaxWidth()
-                .clip(RoundedCornerShape(Dimensions.CornerRadiusSmall))
-        )
-        Spacer(modifier = Modifier.height(Dimensions.SpacerSmall))
-        Text(
-            text = ingredient.name,
-            style = MaterialTheme.typography.titleLarge,
-            color = MaterialTheme.colorScheme.onBackground
-        )
-        Spacer(modifier = Modifier.height(Dimensions.SpacerTiny))
-        Text(
-            text = "ID: ${ingredient.id}",
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onBackground
-        )
+// Helper function to build the correct image URL
+private fun buildImageUrl(ingredient: IngredientSearchResult): String {
+    Log.d("RecipeCard", "Building image URL for ingredient: ${ingredient.name}")
+    Log.d("RecipeCard", "Image field: ${ingredient.image}")
+    
+    val isRecipe = ingredient.image.startsWith("http")
+    
+    return if (isRecipe) {
+        // It's a recipe - use the full URL
+        Log.d("RecipeCard", "Using existing URL for recipe: ${ingredient.image}")
+        ingredient.image
+    } else {
+        // It's an ingredient - build the Spoonacular ingredients URL
+        val fullUrl = "https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}"
+        Log.d("RecipeCard", "Building URL from filename: $fullUrl")
+        fullUrl
     }
 }

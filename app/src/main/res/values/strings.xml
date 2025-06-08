@@ -30,8 +30,59 @@
     <string name="button_eaten">Eaten</string>
     <string name="button_mark">Mark</string>
     <string name="button_swap">Swap</string>
-
-
     <string name="button_add_meal">Add meal</string>
+    <string name="button_add">Add</string>
+    <string name="button_search">Search</string>
+    <string name="button_retry">Retry</string>
+    <string name="button_close">Close</string>
+
+    <!-- Content Descriptions -->
+    <string name="content_description_close">Close</string>
+    <string name="content_description_search">Search</string>
+    <string name="content_description_remove_meal">Remove meal</string>
+
+    <!-- Dialog Titles -->
+    <string name="dialog_title_add_meal">Add Meal</string>
+    <string name="dialog_title_food_details">Food Details</string>
+
+    <!-- Search and Results -->
+    <string name="search_hint_food">Search for food</string>
+    <string name="search_hint_ingredients">Search ingredients...</string>
+    <string name="search_results_title">Search Results</string>
+    <string name="search_no_results">No results found. Try a different search term.</string>
+
+    <!-- Food Categories and Info -->
+    <string name="food_category_recipe">Recipe</string>
     <string name="meals">Meals</string>
+    
+    <!-- Detail Sections -->
+    <string name="section_basic_information">Basic Information</string>
+    <string name="section_macronutrients">Macronutrients</string>
+    <string name="section_other_nutrients">Other Nutrients</string>
+    <string name="section_recipe_info">Recipe Info</string>
+    
+    <!-- Food Detail Labels -->
+    <string name="label_amount">Amount</string>
+    <string name="label_category">Category</string>
+    
+    <!-- Recipe Description -->
+    <string name="recipe_description">This is a complete recipe with multiple ingredients and cooking instructions.</string>
+    
+    <!-- Error Messages -->
+    <string name="error_general">There was an error</string>
+    <string name="error_api_quota_exceeded">Daily API limit reached. Please try again tomorrow.</string>
+    <string name="error_api_unauthorized">API authentication failed. Please check your connection.</string>
+    <string name="error_api_rate_limit">Too many requests. Please wait a moment and try again.</string>
+    <string name="error_network">Network error. Please check your internet connection.</string>
+    
+    <!-- Empty State Messages -->
+    <string name="empty_meals_title">No meals added yet</string>
+    <string name="empty_meals_subtitle">Tap the + button to add your first meal</string>
+    
+    <!-- Formats -->
+    <string name="nutrition_format" formatted="false">%.1f %s</string>
+    <string name="amount_unit_format" formatted="false">%s %s</string>
+    
+    <!-- Recipe Prefix -->
+    <string name="recipe_prefix">🍽️ %s</string>
 </resources>

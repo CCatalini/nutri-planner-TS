@@ -19,10 +19,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.austral.nutri_planner_ts.R
 import com.austral.nutri_planner_ts.ui.components.RecipeCard
-import com.austral.nutri_planner_ts.ui.components.RecipeCardVariant
 import com.austral.nutri_planner_ts.ui.components.SearchBar
 import com.austral.nutri_planner_ts.ui.components.SearchBarVariant
 import com.austral.nutri_planner_ts.ui.theme.Dimensions
@@ -48,7 +49,7 @@ fun Recipes() {
                         else -> SearchBarVariant.DEFAULT
                     }
                 },
-            hint = "Search ingredients...",
+            hint = stringResource(R.string.search_hint_ingredients),
             variant = searchBarVariant,
             onValueChange = { query ->
                 searchQuery = query
@@ -68,20 +69,24 @@ fun Recipes() {
                 )
             }
             is RecipesUiState.Error -> {
-                Text("There was an error")
+                Text(stringResource(R.string.error_general))
                 Button(onClick = viewModel::retry) {
-                    Text("Retry")
+                    Text(stringResource(R.string.button_retry))
                 }
             }
             is RecipesUiState.Success -> {
                 LazyVerticalGrid(
-                    columns = GridCells.Fixed(2),
+                    columns = GridCells.Fixed(Dimensions.GridColumnsRecipes),
                     verticalArrangement = Arrangement.spacedBy(Dimensions.SpacerMedium),
                     horizontalArrangement = Arrangement.spacedBy(Dimensions.SpacerMedium),
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     items(uiState.ingredients) { ingredient ->
-                        RecipeCard(ingredient = ingredient, RecipeCardVariant.Medium)
+                        RecipeCard(
+                            ingredient = ingredient, 
+                            nutritionInfo = null, // No nutrition info available in this context
+                            showDeleteButton = false
+                        )
                     }
                 }
             }

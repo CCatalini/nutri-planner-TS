@@ -19,20 +19,42 @@ object Dimensions {
     // Corner Radius
     val CornerRadiusSmall = 15.dp
     val CornerRadiusMedium = 24.dp
-    val CornerRadiusLarge = 50.dp //
+    val CornerRadiusSearchCard = 12.dp
+    val CornerRadiusLarge = 50.dp
 
     // Icon and Image Sizes
     val IconSizeSmall = 16.dp
     val IconSizeMedium = 24.dp
     val IconSizeLarge = 32.dp
+    val IconSizeExtraSmall = 18.dp
+    val IconSizeClose = 20.dp
 
     val ProgressIndicatorSizeLarge = 72.dp
+    val ProgressIndicatorStrokeWidth = 2.dp
 
     val CardImageWidthMedium = 170.dp
     val CardImageHeightMedium = 93.dp
 
+    // Dialog and Modal Dimensions
+    val DialogMaxHeightPercent = 0.8f
+    val DialogMaxHeightLargePercent = 0.9f
+    
+    // Food Card Dimensions  
+    val FoodImageSize = 48.dp
+    val FoodImageSizeMedium = 64.dp
+    val FoodImageSizeLarge = 120.dp
+    val FoodImageSizeSearchResult = 72.dp
+    val FoodCardDeleteButtonSize = 24.dp
 
+    // Day Screen Cards - Large prominent cards like reference image
+    val DayCardHeight = 190.dp
+    val DayCardImageHeight = 110.dp
+    val DayCardImageCornerRadius = 16.dp
+    val DayCardPadding = 16.dp
 
+    // Add button for search results
+    val AddButtonSize = 40.dp
+    val AddButtonIconSize = 24.dp
 
     // Heights
     val HeightSmall = 4.dp
@@ -48,14 +70,14 @@ object Dimensions {
     val FontLarge = 18.sp
     val FontExtraLarge = 20.sp
 
-    // sizes
+    // Sizes
     val Default = 0.dp
     val Tiny = 1.dp
     val Small = 2.dp
     val Medium = 3.dp
     val Large = 4.dp
 
-    // cards
+    // Cards
     val CardWidthSmall = 180.dp
     val CardHeightSmall = 72.dp
     val CardMinHeightSmall = 60.dp
@@ -63,12 +85,18 @@ object Dimensions {
     val CardImageWidthSmall = 65.dp
     val CardImageHeightSmall = 72.dp
 
-
     val CardHeightMedium = 170.dp
     val CardWidthMedium = 170.dp
 
-
     val CardWidthList = 343.dp
     val CardHeightList = 358.dp
+    
+    // Grid Columns
+    val GridColumnsRecipes = 2
 
+    // Card spacing and sizing improvements
+    val CardElevation = 4.dp
+    val CardPaddingLarge = 20.dp
+    val SearchResultCardHeight = 80.dp
+    val DialogPaddingLarge = 20.dp
 }

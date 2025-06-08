@@ -11,23 +11,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.austral.nutri_planner_ts.R
 import com.austral.nutri_planner_ts.ui.theme.Dimensions
 import com.austral.nutri_planner_ts.ui.theme.ocean_blue
 
-@Composable
-fun MacrosSummary() {
-    val caloriesConsumed = 200
-    val caloriesGoal = 1700
-    val proteinConsumed = 2
-    val proteinGoal = 53
-    val fatConsumed = 10
-    val fatGoal = 21
-    val carbsConsumed = 100
-    val carbsGoal = 131
+data class MacroData(
+    val caloriesConsumed: Int = 0,
+    val caloriesGoal: Int = 2000,
+    val proteinConsumed: Int = 0,
+    val proteinGoal: Int = 95,
+    val fatConsumed: Int = 0,
+    val fatGoal: Int = 60,
+    val carbsConsumed: Int = 0,
+    val carbsGoal: Int = 150
+)
 
+@Composable
+fun MacrosSummary(macroData: MacroData = MacroData()) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -46,18 +49,24 @@ fun MacrosSummary() {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.weight(0.4f)
             ) {
+                val caloriesProgress = macroData.caloriesConsumed.toFloat() / macroData.caloriesGoal
+                val isCaloriesOverGoal = caloriesProgress > 1f
+                
                 CircularProgressIndicator(
-                    progress = { caloriesConsumed.toFloat() / caloriesGoal },
-                    color = MaterialTheme.colorScheme.primary,
-                    trackColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f),
+                    progress = { caloriesProgress.coerceAtMost(1f) },
+                    color = if (isCaloriesOverGoal) Color.Red else MaterialTheme.colorScheme.primary,
+                    trackColor = if (isCaloriesOverGoal) 
+                        Color.Red.copy(alpha = 0.2f) 
+                    else 
+                        MaterialTheme.colorScheme.primary.copy(alpha = 0.2f),
                     strokeWidth = Dimensions.HeightMedium,
                     modifier = Modifier.size(Dimensions.ProgressIndicatorSizeLarge)
                 )
                 Spacer(modifier = Modifier.height(Dimensions.SpacerMedium))
                 Text(
-                    text = "$caloriesConsumed / $caloriesGoal",
+                    text = "${macroData.caloriesConsumed} / ${macroData.caloriesGoal}",
                     style = MaterialTheme.typography.titleLarge,
-                    color = MaterialTheme.colorScheme.onBackground,
+                    color = if (isCaloriesOverGoal) Color.Red else MaterialTheme.colorScheme.onBackground,
                     textAlign = TextAlign.Center
                 )
                 Spacer(modifier = Modifier.height(Dimensions.SpacerSmall))
@@ -78,21 +87,21 @@ fun MacrosSummary() {
             ) {
                 MacroProgressBar(
                     label = stringResource(R.string.protein_label),
-                    value = proteinConsumed,
-                    goal = proteinGoal,
-                    color = MaterialTheme.colorScheme.primary // Protein = rojo
+                    value = macroData.proteinConsumed,
+                    goal = macroData.proteinGoal,
+                    color = MaterialTheme.colorScheme.primary
                 )
                 MacroProgressBar(
                     label = stringResource(R.string.fat_label),
-                    value = fatConsumed,
-                    goal = fatGoal,
-                    color = MaterialTheme.colorScheme.primary // Fat = violeta/grisáceo
+                    value = macroData.fatConsumed,
+                    goal = macroData.fatGoal,
+                    color = MaterialTheme.colorScheme.primary
                 )
                 MacroProgressBar(
                     label = stringResource(R.string.carbs_label),
-                    value = carbsConsumed,
-                    goal = carbsGoal,
-                    color = MaterialTheme.colorScheme.primary // Carbs = amarillo/naranja
+                    value = macroData.carbsConsumed,
+                    goal = macroData.carbsGoal,
+                    color = MaterialTheme.colorScheme.primary
                 )
             }
         }
@@ -106,13 +115,17 @@ fun MacroProgressBar(
     goal: Int,
     color: androidx.compose.ui.graphics.Color
 ) {
+    val progress = value.toFloat() / goal
+    val isOverGoal = progress > 1f
+    val excess = if (isOverGoal) value - goal else 0
+    
     Column(modifier = Modifier.fillMaxWidth()) {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(
-                text = label,
+                text = if (isOverGoal) "$label ⚠️" else label,
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onBackground
             )
@@ -124,9 +137,9 @@ fun MacroProgressBar(
         }
         Spacer(modifier = Modifier.height(Dimensions.SpacerTiny))
         LinearProgressIndicator(
-            progress = { value.toFloat() / goal },
+            progress = { if (isOverGoal) 1f else progress },
             color = color,
-            trackColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f),
+            trackColor = color.copy(alpha = 0.2f),
             modifier = Modifier
                 .fillMaxWidth()
                 .height(Dimensions.HeightMedium)
