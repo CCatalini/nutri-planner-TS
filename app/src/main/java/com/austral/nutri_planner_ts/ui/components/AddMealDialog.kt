@@ -231,6 +231,7 @@ fun SearchResultItem(
 }
 
 // Helper function for search result images
+@Composable
 private fun buildSearchImageUrl(ingredient: IngredientSearchResult): String {
     val isRecipe = ingredient.image.startsWith("http")
     
@@ -239,6 +240,6 @@ private fun buildSearchImageUrl(ingredient: IngredientSearchResult): String {
         ingredient.image
     } else {
         // It's an ingredient - build the Spoonacular ingredients URL
-        "https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}"
+        stringResource(R.string.spoonacular_ingredients_image_url) + ingredient.image
     }
 } 

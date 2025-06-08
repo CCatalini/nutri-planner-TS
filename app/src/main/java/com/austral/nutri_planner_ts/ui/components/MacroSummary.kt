@@ -15,18 +15,31 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.austral.nutri_planner_ts.R
+import com.austral.nutri_planner_ts.ui.theme.Constants
 import com.austral.nutri_planner_ts.ui.theme.Dimensions
 import com.austral.nutri_planner_ts.ui.theme.ocean_blue
 
+@Composable
+fun getDefaultMacroData() = MacroData(
+    caloriesConsumed = 0,
+    caloriesGoal = stringResource(R.string.default_calories_goal).toInt(),
+    proteinConsumed = 0,
+    proteinGoal = stringResource(R.string.default_protein_goal).toInt(),
+    fatConsumed = 0,
+    fatGoal = stringResource(R.string.default_fat_goal).toInt(),
+    carbsConsumed = 0,
+    carbsGoal = stringResource(R.string.default_carbs_goal).toInt()
+)
+
 data class MacroData(
     val caloriesConsumed: Int = 0,
-    val caloriesGoal: Int = 2000,
+    val caloriesGoal: Int = Constants.DEFAULT_CALORIES_GOAL,
     val proteinConsumed: Int = 0,
-    val proteinGoal: Int = 95,
+    val proteinGoal: Int = Constants.DEFAULT_PROTEIN_GOAL,
     val fatConsumed: Int = 0,
-    val fatGoal: Int = 60,
+    val fatGoal: Int = Constants.DEFAULT_FAT_GOAL,
     val carbsConsumed: Int = 0,
-    val carbsGoal: Int = 150
+    val carbsGoal: Int = Constants.DEFAULT_CARBS_GOAL
 )
 
 @Composable

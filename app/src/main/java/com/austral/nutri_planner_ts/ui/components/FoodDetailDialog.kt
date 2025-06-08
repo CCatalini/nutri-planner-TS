@@ -113,7 +113,7 @@ private fun FoodHeaderSection(foodItem: IngredientSearchResult) {
     val imageUrl = if (isRecipe) {
         foodItem.image
     } else {
-        "https://spoonacular.com/cdn/ingredients_100x100/${foodItem.image}"
+        stringResource(R.string.spoonacular_ingredients_image_url) + foodItem.image
     }
     
     Card(

@@ -1,3 +1,5 @@
 <resources>
     <string name="spoonacular_url">https://api.spoonacular.com/</string>
+    <string name="spoonacular_ingredients_image_url">https://spoonacular.com/cdn/ingredients_100x100/</string>
+    <string name="spoonacular_recipe_default_image">https://spoonacular.com/recipeImages/default.jpg</string>
 </resources>

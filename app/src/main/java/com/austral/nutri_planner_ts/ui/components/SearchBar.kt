@@ -22,6 +22,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import com.austral.nutri_planner_ts.R
 import com.austral.nutri_planner_ts.ui.theme.Dimensions
@@ -36,7 +37,7 @@ enum class SearchBarVariant {
 @Composable
 fun SearchBar(
     modifier: Modifier = Modifier,
-    hint: String = "Поиск",
+    hint: String = stringResource(R.string.search_hint_default),
     variant: SearchBarVariant = SearchBarVariant.DEFAULT,
     onValueChange: (String) -> Unit = {},
     onClear: () -> Unit = {}
@@ -85,7 +86,7 @@ fun SearchBar(
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_search),
-                    contentDescription = "Search Icon",
+                    contentDescription = stringResource(R.string.content_description_search_icon),
                     tint = MaterialTheme.colorScheme.onBackground,
                     modifier = Modifier.size(Dimensions.IconSizeMedium)
                 )
@@ -113,7 +114,7 @@ fun SearchBar(
                     ) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_close),
-                            contentDescription = "Clear text",
+                            contentDescription = stringResource(R.string.content_description_clear_text),
                             tint = MaterialTheme.colorScheme.onBackground,
                             modifier = Modifier.size(Dimensions.IconSizeMedium)
                         )

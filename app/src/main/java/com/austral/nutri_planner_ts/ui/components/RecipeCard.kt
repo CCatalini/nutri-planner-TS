@@ -96,7 +96,7 @@ fun RecipeCard(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = "${calories} cal",
+                                text = stringResource(R.string.calories_short_format, calories),
                                 style = MaterialTheme.typography.bodyLarge,
                                 color = MaterialTheme.colorScheme.onSecondary.copy(alpha = 0.8f)
                             )
@@ -162,6 +162,7 @@ fun RecipeCard(
 }
 
 // Helper function to build the correct image URL
+@Composable
 private fun buildImageUrl(ingredient: IngredientSearchResult): String {
     Log.d("RecipeCard", "Building image URL for ingredient: ${ingredient.name}")
     Log.d("RecipeCard", "Image field: ${ingredient.image}")
@@ -174,7 +175,7 @@ private fun buildImageUrl(ingredient: IngredientSearchResult): String {
         ingredient.image
     } else {
         // It's an ingredient - build the Spoonacular ingredients URL
-        val fullUrl = "https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}"
+        val fullUrl = stringResource(R.string.spoonacular_ingredients_image_url) + ingredient.image
         Log.d("RecipeCard", "Building URL from filename: $fullUrl")
         fullUrl
     }
