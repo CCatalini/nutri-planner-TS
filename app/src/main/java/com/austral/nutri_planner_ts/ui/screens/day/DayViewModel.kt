@@ -23,6 +23,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DayViewModel @Inject constructor(
     private val apiServiceImpl: ApiServiceImpl,
+    private val profileRepository: com.austral.nutri_planner_ts.ui.screens.profile.ProfileRepository,
     @ApplicationContext private val context: Context
 ) : ViewModel() {
 
@@ -253,15 +254,84 @@ class DayViewModel @Inject constructor(
             }
         }
 
+        // Initialize with default values - will be updated asynchronously
+        var macroData = createMacroDataWithDefaults(totalCalories, totalProtein, totalFat, totalCarbs)
+        
+        // Get recommended macros (personalized or defaults) asynchronously
+        viewModelScope.launch {
+            try {
+                val recommendation = profileRepository.getRecommendedMacros()
+                val updatedMacroData = MacroData(
+                    caloriesConsumed = totalCalories.toInt(),
+                    caloriesGoal = recommendation.calories,
+                    proteinConsumed = totalProtein.toInt(),
+                    proteinGoal = recommendation.protein,
+                    fatConsumed = totalFat.toInt(),
+                    fatGoal = recommendation.fat,
+                    carbsConsumed = totalCarbs.toInt(),
+                    carbsGoal = recommendation.carbs
+                )
+                
+                // Update the UI state with personalized/default goals
+                val currentState = _uiState.value
+                if (currentState is DayUiState.Success) {
+                    _uiState.value = currentState.copy(macroData = updatedMacroData)
+                    
+                    // Save daily entry to history
+                    saveDailyEntry(updatedMacroData)
+                }
+            } catch (e: Exception) {
+                // If something fails, keep the default macro data already set
+            }
+        }
+
+        return macroData
+    }
+    
+    /**
+     * Creates MacroData with default values while profile data is being loaded
+     */
+    private fun createMacroDataWithDefaults(
+        totalCalories: Double,
+        totalProtein: Double,
+        totalFat: Double,
+        totalCarbs: Double
+    ): MacroData {
         return MacroData(
             caloriesConsumed = totalCalories.toInt(),
-            caloriesGoal = 2000,
+            caloriesGoal = 2000,  // Will be updated with actual recommendation
             proteinConsumed = totalProtein.toInt(),
-            proteinGoal = 95,
+            proteinGoal = 100,    // Will be updated with actual recommendation
             fatConsumed = totalFat.toInt(),
-            fatGoal = 60,
+            fatGoal = 67,         // Will be updated with actual recommendation
             carbsConsumed = totalCarbs.toInt(),
-            carbsGoal = 150
+            carbsGoal = 250       // Will be updated with actual recommendation
         )
     }
+    
+    private fun saveDailyEntry(macroData: MacroData) {
+        viewModelScope.launch {
+            try {
+                val today = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
+                    .format(java.util.Date())
+                
+                val dailyEntry = com.austral.nutri_planner_ts.ui.screens.profile.DailyEntry(
+                    date = today,
+                    consumedCalories = macroData.caloriesConsumed,
+                    consumedProtein = macroData.proteinConsumed,
+                    consumedCarbs = macroData.carbsConsumed,
+                    consumedFat = macroData.fatConsumed,
+                    recommendedCalories = macroData.caloriesGoal,
+                    recommendedProtein = macroData.proteinGoal,
+                    recommendedCarbs = macroData.carbsGoal,
+                    recommendedFat = macroData.fatGoal
+                )
+                
+                profileRepository.addDailyEntry(dailyEntry)
+            } catch (e: Exception) {
+                // Handle error silently
+            }
+        }
+    }
 }
+

@@ -3,8 +3,7 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
-    id("dagger.hilt.android.plugin")
+    alias(libs.plugins.hilt.android)
     id("kotlin-kapt")
 }
 
@@ -28,6 +27,8 @@ android {
         }
 
         buildConfigField("String", "SPOONACULAR_API_KEY", "\"${localProperties.getProperty("spoonacular.api.key", "")}\"")
+        buildConfigField("String", "OPENAI_API_KEY", "\"${localProperties.getProperty("openai.api.key", "")}\"")
+        buildConfigField("String", "CLAUDE_API_KEY", "\"${localProperties.getProperty("claude.api.key", "")}\"")
     }
 
     buildTypes {
@@ -50,6 +51,9 @@ android {
         compose = true
         buildConfig = true
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.8"
+    }
 }
 
 dependencies {
@@ -64,19 +68,24 @@ dependencies {
     implementation(libs.androidx.material3)
 
     //Hilt
-    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
-    implementation("com.google.dagger:hilt-android:2.49")
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.hilt.android)
     implementation(libs.androidx.lifecycle.runtime.compose.android)
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    kapt(libs.hilt.android.compiler)
 
     // Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.okhttp)
 
     // imagen
-    implementation("io.coil-kt:coil-compose:2.4.0")
+    implementation(libs.coil.compose)
 
+    // OkHttp interceptor for API calls
+    implementation(libs.logging.interceptor)
+    
+    // SharedPreferences para almacenar datos del usuario
+    implementation(libs.androidx.datastore.preferences)
 
     testImplementation(libs.junit)
 

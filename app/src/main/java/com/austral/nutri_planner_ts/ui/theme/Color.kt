@@ -20,6 +20,8 @@ val medium_blue = Color(0xFF3299FF)
 val ocean_blue = Color(0xFF0068FF)
 
 
+
+
 val text1 = Color(0xFF031314)
 val text2 = Color(0xFF052224)
 val text3 = Color(0xFFE9F3EA)

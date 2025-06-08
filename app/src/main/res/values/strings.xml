@@ -103,4 +103,53 @@
     <string name="default_protein_goal">95</string>
     <string name="default_fat_goal">60</string>
     <string name="default_carbs_goal">150</string>
+    
+    <!-- Profile Screen -->
+    <string name="profile_title">Profile</string>
+    <string name="profile_user_name">Cami</string>
+    <string name="profile_subtitle">Tap options below to customize your profile</string>
+    
+    <!-- Calorie Chart -->
+    <string name="calories_title">Calories</string>
+    <string name="daily_average_format">Daily average %d kCal</string>
+    <string name="percentage_from_previous_week">100%% from previous week</string>
+    <string name="chart_reference_value">2,400</string>
+    <string name="chart_legend_eaten">Eaten</string>
+    <string name="chart_legend_uneaten">Uneaten</string>
+    
+    <!-- Profile Options -->
+    <string name="profile_option_daily_calorie_goal">Daily calorie goal</string>
+    <string name="profile_option_plan_type">Plan type</string>
+    <string name="profile_option_plan_type_flexible">Flexible</string>
+    <string name="profile_option_generate_recommendations">Generate recommendations</string>
+    <string name="profile_option_generate_subtitle">Get AI-powered macro goals</string>
+    <string name="profile_option_allergies">Allergies and dislikes</string>
+    <string name="profile_option_allergies_subtitle">Manage your food preferences</string>
+    <string name="profile_option_avatar">Avatar</string>
+    <string name="profile_option_avatar_subtitle">Personalize your profile picture</string>
+    <string name="calorie_goal_format">%d kCal</string>
+    
+    <!-- Edit Profile Dialog -->
+    <string name="edit_profile_title">Edit Profile</string>
+    <string name="edit_profile_age_label">Age</string>
+    <string name="edit_profile_gender_label">Gender</string>
+    <string name="edit_profile_gender_male">Male</string>
+    <string name="edit_profile_gender_female">Female</string>
+    <string name="edit_profile_weight_label">Weight (kg)</string>
+    <string name="edit_profile_height_label">Height (cm)</string>
+    <string name="edit_profile_save">Save</string>
+    <string name="edit_profile_cancel">Cancel</string>
+    
+    <!-- Chart Days -->
+    <string name="chart_day_monday">Mon</string>
+    <string name="chart_day_tuesday">Tue</string>
+    <string name="chart_day_wednesday">Wed</string>
+    <string name="chart_day_thursday">Thu</string>
+    <string name="chart_day_friday">Fri</string>
+    <string name="chart_day_saturday">Sat</string>
+    <string name="chart_day_sunday">Sun</string>
+    
+    <!-- Loading and Error States -->
+    <string name="loading_message">Loading profile...</string>
+    <string name="retry_button">Retry</string>
 </resources>

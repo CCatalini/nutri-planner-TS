@@ -48,6 +48,8 @@ private val DarkColorScheme = darkColorScheme(
     background = background_dark,
     onBackground = text3,
 
+    outline = ocean_blue,
+
     )
 
 private val LightColorScheme = lightColorScheme(
@@ -64,5 +66,6 @@ private val LightColorScheme = lightColorScheme(
     background = background_light,
     onBackground = text1,
 
+    outline = ocean_blue,
     )
 

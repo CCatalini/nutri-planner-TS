@@ -99,4 +99,23 @@ object Dimensions {
     val CardPaddingLarge = 20.dp
     val SearchResultCardHeight = 80.dp
     val DialogPaddingLarge = 20.dp
+    
+    // Profile Screen Specific
+    val ProfileIconBackgroundSize = 48.dp
+    val ProfileOptionIconSize = 24.dp
+    val ProfileChartBarWidth = 32.dp
+    val ProfileChartHeight = 120.dp
+    val ProfileChartBarMinHeight = 20.dp
+    val ProfileChartLineHeight = 1.dp
+    val ProfileChartGoalLineHeight = 2.dp
+    val ProfileLegendDotSize = 12.dp
+    val ProfileBottomSpacing = 80.dp
+    val ProfileFormFieldSpacing = 16.dp
+    val ProfileLoadingStrokeWidth = 3.dp
+    val ProfileCardElevationLow = 1.dp
+    val ProfileCardElevationMedium = 2.dp
+    
+    // Chart specific heights and spacings
+    val ChartReferenceSpacing = 16.dp
+    val ChartBarsSpacing = 8.dp
 }
