@@ -11,7 +11,6 @@ import androidx.navigation.compose.composable
 import com.austral.nutri_planner_ts.ui.screens.day.Day
 import com.austral.nutri_planner_ts.ui.screens.profile.Profile
 import com.austral.nutri_planner_ts.ui.screens.recipe.Recipes
-import com.austral.nutri_planner_ts.ui.screens.week.Week
 import com.austral.nutri_planner_ts.ui.theme.Dimensions.PaddingLarge
 
 
@@ -26,7 +25,6 @@ fun NavHostComposable(innerPadding: PaddingValues, navController: NavHostControl
             .padding(PaddingLarge)
     ){
         composable(route = ScreenNames.Day.name) { Day() }
-        composable(route = ScreenNames.Week.name) { Week() }
         composable(route = ScreenNames.Recipes.name) { Recipes() }
         composable(route = ScreenNames.Profile.name) { Profile() }
     }

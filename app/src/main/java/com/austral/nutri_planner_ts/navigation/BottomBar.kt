@@ -34,7 +34,6 @@ fun BottomBar(
 ) {
     val items = listOf(
         TabBarItem(ScreenNames.Day.name, R.drawable.ic_day),
-        TabBarItem(ScreenNames.Week.name, R.drawable.ic_week),
         TabBarItem(ScreenNames.Recipes.name, R.drawable.ic_recipes),
         TabBarItem(ScreenNames.Profile.name, R.drawable.ic_profile),
     )
