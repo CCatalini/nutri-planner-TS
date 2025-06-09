@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import com.austral.nutri_planner_ts.api.ClaudeService
 
 data class UserProfile(
     val age: Int = 0,

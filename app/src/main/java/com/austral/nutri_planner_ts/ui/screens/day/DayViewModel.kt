@@ -261,16 +261,21 @@ class DayViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val recommendation = profileRepository.getRecommendedMacros()
-                val updatedMacroData = MacroData(
-                    caloriesConsumed = totalCalories.toInt(),
-                    caloriesGoal = recommendation.calories,
-                    proteinConsumed = totalProtein.toInt(),
-                    proteinGoal = recommendation.protein,
-                    fatConsumed = totalFat.toInt(),
-                    fatGoal = recommendation.fat,
-                    carbsConsumed = totalCarbs.toInt(),
-                    carbsGoal = recommendation.carbs
-                )
+                val updatedMacroData = if (recommendation != null) {
+                    MacroData(
+                        caloriesConsumed = totalCalories.toInt(),
+                        caloriesGoal = recommendation.calories,
+                        proteinConsumed = totalProtein.toInt(),
+                        proteinGoal = recommendation.protein,
+                        fatConsumed = totalFat.toInt(),
+                        fatGoal = recommendation.fat,
+                        carbsConsumed = totalCarbs.toInt(),
+                        carbsGoal = recommendation.carbs
+                    )
+                } else {
+                    // Use default values if no recommendation is available
+                    createMacroDataWithDefaults(totalCalories, totalProtein, totalFat, totalCarbs)
+                }
                 
                 // Update the UI state with personalized/default goals
                 val currentState = _uiState.value
