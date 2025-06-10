@@ -13,6 +13,9 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import com.austral.nutri_planner_ts.R
+import com.austral.nutri_planner_ts.ui.theme.Dimensions
 import com.austral.nutri_planner_ts.ui.screens.profile.DailyEntry
 import com.austral.nutri_planner_ts.ui.screens.profile.MacroRecommendation
 
@@ -26,20 +29,24 @@ fun CalorieChartCard(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .height(200.dp),
-        shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+            .height(Dimensions.CalorieChartHeight),
+        shape = RoundedCornerShape(Dimensions.CornerRadiusMedium),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondary
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = Dimensions.CardElevationDefault)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp)
+                .padding(Dimensions.PaddingMedium)
         ) {
             Text(
-                text = "Calorie Intake (Last 7 Days)",
-                fontSize = 18.sp,
+                text = stringResource(R.string.calorie_chart_title),
+                fontSize = Dimensions.FontSizeSubtitle,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(bottom = 16.dp)
+                color = MaterialTheme.colorScheme.onSecondary,
+                modifier = Modifier.padding(bottom = Dimensions.PaddingMedium)
             )
             
             if (dailyHistory.isEmpty()) {
@@ -48,9 +55,9 @@ fun CalorieChartCard(
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = "No data available",
-                        fontSize = 14.sp,
-                        color = Color.Gray
+                        text = stringResource(R.string.chart_no_data),
+                        fontSize = Dimensions.FontSizeCaption,
+                        color = MaterialTheme.colorScheme.onSecondary.copy(alpha = 0.7f)
                     )
                 }
             } else {

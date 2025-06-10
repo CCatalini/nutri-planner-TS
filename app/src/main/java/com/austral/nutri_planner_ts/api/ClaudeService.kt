@@ -7,6 +7,7 @@ import com.austral.nutri_planner_ts.ui.screens.profile.UserProfile
 import com.austral.nutri_planner_ts.ui.screens.profile.MacroRecommendation
 import com.austral.nutri_planner_ts.ui.screens.profile.Gender
 import com.austral.nutri_planner_ts.ui.screens.profile.Goal
+import com.austral.nutri_planner_ts.ui.theme.ApiConstants
 
 @Singleton
 class ClaudeService @Inject constructor() {
@@ -17,9 +18,15 @@ class ClaudeService @Inject constructor() {
         
         // Basic BMR calculation (Mifflin-St Jeor Equation)
         val bmr = if (profile.gender == Gender.MALE) {
-            10 * profile.weight + 6.25 * profile.height - 5 * profile.age + 5
+            ApiConstants.BMR_WEIGHT_MULTIPLIER * profile.weight + 
+            ApiConstants.BMR_HEIGHT_MULTIPLIER * profile.height + 
+            ApiConstants.BMR_AGE_MULTIPLIER * profile.age + 
+            ApiConstants.BMR_MALE_CONSTANT
         } else {
-            10 * profile.weight + 6.25 * profile.height - 5 * profile.age - 161
+            ApiConstants.BMR_WEIGHT_MULTIPLIER * profile.weight + 
+            ApiConstants.BMR_HEIGHT_MULTIPLIER * profile.height + 
+            ApiConstants.BMR_AGE_MULTIPLIER * profile.age + 
+            ApiConstants.BMR_FEMALE_CONSTANT
         }
         
         // Activity factor
@@ -30,15 +37,15 @@ class ClaudeService @Inject constructor() {
         
         // Adjust for goal
         val calories = when (profile.goal) {
-            Goal.LOSE_WEIGHT -> (tdee - 500).toInt() // 500 calorie deficit
-            Goal.GAIN_WEIGHT -> (tdee + 500).toInt() // 500 calorie surplus
-            Goal.MAINTAIN_WEIGHT -> tdee.toInt() // maintain weight
+            Goal.LOSE_WEIGHT -> (tdee - ApiConstants.CALORIE_DEFICIT).toInt()
+            Goal.GAIN_WEIGHT -> (tdee + ApiConstants.CALORIE_SURPLUS).toInt()
+            Goal.MAINTAIN_WEIGHT -> tdee.toInt()
         }
         
-        // Macro distribution (40% carbs, 30% protein, 30% fat)
-        val protein = (calories * 0.30 / 4).toInt() // 4 calories per gram
-        val carbs = (calories * 0.40 / 4).toInt()   // 4 calories per gram
-        val fat = (calories * 0.30 / 9).toInt()     // 9 calories per gram
+        // Macro distribution
+        val protein = (calories * ApiConstants.PROTEIN_PERCENTAGE / ApiConstants.CALORIES_PER_GRAM_PROTEIN).toInt()
+        val carbs = (calories * ApiConstants.CARBS_PERCENTAGE / ApiConstants.CALORIES_PER_GRAM_CARBS).toInt()
+        val fat = (calories * ApiConstants.FAT_PERCENTAGE / ApiConstants.CALORIES_PER_GRAM_FAT).toInt()
         
         return MacroRecommendation(
             calories = calories,

@@ -5,7 +5,7 @@ import com.austral.nutri_planner_ts.api.IngredientSearchResult
 import com.austral.nutri_planner_ts.api.IngredientSearchResponse
 import com.austral.nutri_planner_ts.api.IngredientInformation
 import com.austral.nutri_planner_ts.api.RecipeSearchResponse
-import com.austral.nutri_planner_ts.ui.theme.Constants
+import com.austral.nutri_planner_ts.ui.theme.ApiConstants
 import okhttp3.OkHttpClient
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
@@ -44,7 +44,7 @@ class ApiServiceImpl @Inject constructor() {
     }
 
     fun searchIngredients(
-        baseUrl: String = Constants.SPOONACULAR_BASE_URL,
+        baseUrl: String = ApiConstants.SPOONACULAR_BASE_URL,
         query: String = "apple",
         onSuccess: (List<IngredientSearchResult>) -> Unit,
         onFail: () -> Unit,
@@ -84,7 +84,7 @@ class ApiServiceImpl @Inject constructor() {
     }
 
     fun getIngredientInformation(
-        baseUrl: String = Constants.SPOONACULAR_BASE_URL,
+        baseUrl: String = ApiConstants.SPOONACULAR_BASE_URL,
         ingredientId: Int,
         amount: Double = 100.0,
         unit: String = "grams",
@@ -134,7 +134,7 @@ class ApiServiceImpl @Inject constructor() {
     }
 
     fun searchFood(
-        baseUrl: String = Constants.SPOONACULAR_BASE_URL,
+        baseUrl: String = ApiConstants.SPOONACULAR_BASE_URL,
         query: String = "chicken",
         onSuccess: (List<IngredientSearchResult>) -> Unit,
         onFail: () -> Unit,
@@ -179,7 +179,7 @@ class ApiServiceImpl @Inject constructor() {
                                 val recipes = recipeResults.map { recipe ->
                                     Log.d("SearchFood", "Recipe: ${recipe.title}")
                                     Log.d("SearchFood", "Recipe image URL: ${recipe.image}")
-                                    val finalImageUrl = recipe.image ?: Constants.SPOONACULAR_RECIPE_DEFAULT_IMAGE
+                                    val finalImageUrl = recipe.image ?: ApiConstants.SPOONACULAR_RECIPE_DEFAULT_IMAGE
                                     Log.d("SearchFood", "Final image URL: $finalImageUrl")
                                     // Convert recipe to IngredientSearchResult for compatibility
                                     IngredientSearchResult(
@@ -264,7 +264,7 @@ class ApiServiceImpl @Inject constructor() {
     }
 
     fun getRecipeInformation(
-        baseUrl: String = Constants.SPOONACULAR_BASE_URL,
+        baseUrl: String = ApiConstants.SPOONACULAR_BASE_URL,
         recipeId: Int,
         onSuccess: (com.austral.nutri_planner_ts.api.RecipeInformation) -> Unit,
         onFail: () -> Unit,

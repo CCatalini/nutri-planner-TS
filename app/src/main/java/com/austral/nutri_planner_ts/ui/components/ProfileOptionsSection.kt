@@ -14,6 +14,9 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import com.austral.nutri_planner_ts.R
+import com.austral.nutri_planner_ts.ui.theme.Dimensions
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,52 +33,65 @@ fun ProfileOptionsSection(
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+        shape = RoundedCornerShape(Dimensions.CornerRadiusMedium),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondary
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = Dimensions.CardElevationDefault)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(Dimensions.PaddingMedium)
         ) {
             Text(
-                text = "Options",
-                fontSize = 18.sp,
+                text = stringResource(R.string.profile_options_title),
+                fontSize = Dimensions.FontSizeSubtitle,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(bottom = 16.dp)
+                color = MaterialTheme.colorScheme.onSecondary,
+                modifier = Modifier.padding(bottom = Dimensions.PaddingMedium)
             )
             
             ProfileOption(
                 icon = Icons.Default.Edit,
-                title = "Edit Profile",
-                subtitle = "Update your personal information",
+                title = stringResource(R.string.profile_option_edit_title),
+                subtitle = stringResource(R.string.profile_option_edit_subtitle),
                 onClick = onEditProfile
             )
             
-            Divider(modifier = Modifier.padding(vertical = 8.dp))
+            Divider(
+                modifier = Modifier.padding(vertical = Dimensions.SpacerSmall),
+                color = MaterialTheme.colorScheme.onSecondary.copy(alpha = 0.2f)
+            )
             
             ProfileOption(
                 icon = Icons.Default.Settings,
-                title = "Settings",
-                subtitle = "App preferences and notifications",
+                title = stringResource(R.string.profile_option_settings_title),
+                subtitle = stringResource(R.string.profile_option_settings_subtitle),
                 onClick = onSettings
             )
             
-            Divider(modifier = Modifier.padding(vertical = 8.dp))
+            Divider(
+                modifier = Modifier.padding(vertical = Dimensions.SpacerSmall),
+                color = MaterialTheme.colorScheme.onSecondary.copy(alpha = 0.2f)
+            )
             
             ProfileOption(
                 icon = Icons.Default.Phone,
-                title = "Help & Support",
-                subtitle = "Get help and contact support",
+                title = stringResource(R.string.profile_option_help_title),
+                subtitle = stringResource(R.string.profile_option_help_subtitle),
                 onClick = onHelp
             )
             
-            Divider(modifier = Modifier.padding(vertical = 8.dp))
+            Divider(
+                modifier = Modifier.padding(vertical = Dimensions.SpacerSmall),
+                color = MaterialTheme.colorScheme.onSecondary.copy(alpha = 0.2f)
+            )
             
             ProfileOption(
                 icon = Icons.Default.Info,
-                title = "About",
-                subtitle = "App version and information",
+                title = stringResource(R.string.profile_option_about_title),
+                subtitle = stringResource(R.string.profile_option_about_subtitle),
                 onClick = onAbout
             )
         }
@@ -101,31 +117,32 @@ private fun ProfileOption(
             imageVector = icon,
             contentDescription = title,
             tint = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.size(24.dp)
+            modifier = Modifier.size(Dimensions.ProfileOptionsIconSize)
         )
         
-        Spacer(modifier = Modifier.width(16.dp))
+        Spacer(modifier = Modifier.width(Dimensions.PaddingMedium))
         
         Column(
             modifier = Modifier.weight(1f)
         ) {
             Text(
                 text = title,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Medium
+                fontSize = Dimensions.FontSizeBody,
+                fontWeight = FontWeight.Medium,
+                color = MaterialTheme.colorScheme.onSecondary
             )
             Text(
                 text = subtitle,
-                fontSize = 14.sp,
-                color = Color.Gray
+                fontSize = Dimensions.FontSizeCaption,
+                color = MaterialTheme.colorScheme.onSecondary.copy(alpha = 0.7f)
             )
         }
         
         Icon(
             imageVector = Icons.Default.KeyboardArrowRight,
-            contentDescription = "Navigate",
-            tint = Color.Gray,
-            modifier = Modifier.size(20.dp)
+            contentDescription = stringResource(R.string.content_description_navigate),
+            tint = MaterialTheme.colorScheme.onSecondary.copy(alpha = 0.6f),
+            modifier = Modifier.size(Dimensions.ProfileOptionsArrowSize)
         )
     }
 } 

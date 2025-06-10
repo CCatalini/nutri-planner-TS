@@ -17,9 +17,9 @@
 
     <!-- Meal Items -->
     <string name="meal_apple">Apple</string>
-    <string name="meal_chicken_salad">Chicken Salad</string>
-    <string name="meal_yogurt_berries">Greek Yogurt with Berries</string>
-    <string name="meal_salmon_quinoa">Grilled Salmon with Quinoa</string>
+    <string name="meal_chicken_salad">Chicken salad</string>
+    <string name="meal_yogurt_berries">Greek yogurt with berries</string>
+    <string name="meal_salmon_quinoa">Grilled salmon with quinoa</string>
 
     <!-- Meal Item Details -->
     <string name="preparation_time_format">%1$d min</string>
@@ -42,13 +42,13 @@
     <string name="content_description_remove_meal">Remove meal</string>
 
     <!-- Dialog Titles -->
-    <string name="dialog_title_add_meal">Add Meal</string>
-    <string name="dialog_title_food_details">Food Details</string>
+    <string name="dialog_title_add_meal">Add meal</string>
+    <string name="dialog_title_food_details">Food details</string>
 
     <!-- Search and Results -->
     <string name="search_hint_food">Search for food</string>
     <string name="search_hint_ingredients">Search ingredients...</string>
-    <string name="search_results_title">Search Results</string>
+    <string name="search_results_title">Search results</string>
     <string name="search_no_results">No results found. Try a different search term.</string>
 
     <!-- Food Categories and Info -->
@@ -56,10 +56,10 @@
     <string name="meals">Meals</string>
     
     <!-- Detail Sections -->
-    <string name="section_basic_information">Basic Information</string>
+    <string name="section_basic_information">Basic information</string>
     <string name="section_macronutrients">Macronutrients</string>
-    <string name="section_other_nutrients">Other Nutrients</string>
-    <string name="section_recipe_info">Recipe Info</string>
+    <string name="section_other_nutrients">Other nutrients</string>
+    <string name="section_recipe_info">Recipe info</string>
     
     <!-- Food Detail Labels -->
     <string name="label_amount">Amount</string>
@@ -88,12 +88,12 @@
     
     <!-- SearchBar -->
     <string name="search_hint_default">Search</string>
-    <string name="content_description_search_icon">Search Icon</string>
+    <string name="content_description_search_icon">Search icon</string>
     <string name="content_description_clear_text">Clear text</string>
     
     <!-- Screen Titles -->
-    <string name="screen_title_profile">Profile Screen</string>
-    <string name="screen_title_week">Week Screen</string>
+    <string name="screen_title_profile">Profile screen</string>
+    <string name="screen_title_week">Week screen</string>
     
     <!-- Calories Format -->
     <string name="calories_short_format">%d cal</string>
@@ -152,4 +152,44 @@
     <!-- Loading and Error States -->
     <string name="loading_message">Loading profile...</string>
     <string name="retry_button">Retry</string>
+    
+    <!-- Profile Dialog and Options -->
+    <string name="profile_options_title">Options</string>
+    <string name="profile_option_edit_title">Edit profile</string>
+    <string name="profile_option_edit_subtitle">Update your personal information</string>
+    <string name="profile_option_settings_title">Settings</string>
+    <string name="profile_option_settings_subtitle">App preferences and notifications</string>
+    <string name="profile_option_help_title">Help &amp; Support</string>
+    <string name="profile_option_help_subtitle">Get help and contact support</string>
+    <string name="profile_option_about_title">About</string>
+    <string name="profile_option_about_subtitle">App version and information</string>
+    
+    <!-- Edit Profile Labels -->
+    <string name="edit_profile_activity_level_label">Activity level</string>
+    <string name="edit_profile_goal_label">Goal</string>
+    <string name="edit_profile_target_weight_label">Target weight (kg)</string>
+    <string name="edit_profile_time_frame_label">Time frame (weeks)</string>
+    <string name="edit_profile_weekly_workouts_label">Weekly workouts</string>
+    
+    <!-- Activity Levels -->
+    <string name="activity_level_sedentary">Sedentary</string>
+    <string name="activity_level_lightly_active">Lightly Active</string>
+    <string name="activity_level_moderately_active">Moderately Active</string>
+    <string name="activity_level_very_active">Very Active</string>
+    <string name="activity_level_extremely_active">Extremely Active</string>
+    
+    <!-- Goals -->
+    <string name="goal_lose_weight">Lose Weight</string>
+    <string name="goal_maintain_weight">Maintain Weight</string>
+    <string name="goal_gain_weight">Gain Weight</string>
+    
+    <!-- Calorie Chart -->
+    <string name="calorie_chart_title">Calorie intake (last 7 days)</string>
+    <string name="chart_no_data">No data available</string>
+    
+    <!-- Navigation Content Description -->
+    <string name="content_description_navigate">Navigate</string>
+    
+    <!-- Macro Recommendation Explanation -->
+    <string name="macro_recommendation_explanation">Based on your profile, here are your recommended daily intake values. This calculation uses the Mifflin-St Jeor equation for BMR and adjusts for your activity level and goals.</string>
 </resources>

@@ -1,6 +1,9 @@
 package com.austral.nutri_planner_ts.ui.components
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -11,6 +14,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.res.stringResource
+import com.austral.nutri_planner_ts.R
+import com.austral.nutri_planner_ts.ui.theme.Dimensions
 import com.austral.nutri_planner_ts.ui.screens.profile.UserProfile
 import com.austral.nutri_planner_ts.ui.screens.profile.Gender
 import com.austral.nutri_planner_ts.ui.screens.profile.ActivityLevel
@@ -41,38 +47,50 @@ fun EditProfileDialog(
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
-            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+                .padding(Dimensions.DialogPadding),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.secondary
+            ),
+            elevation = CardDefaults.cardElevation(defaultElevation = Dimensions.CardElevationDialog)
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(24.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                    .padding(Dimensions.DialogContentPadding),
+                verticalArrangement = Arrangement.spacedBy(Dimensions.DialogFieldSpacing)
             ) {
                 Text(
-                    text = "Edit Profile",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
+                    text = stringResource(R.string.edit_profile_title),
+                    fontSize = Dimensions.FontSizeTitle,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSecondary
                 )
                 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    horizontalArrangement = Arrangement.spacedBy(Dimensions.DialogButtonSpacing)
                 ) {
                     OutlinedTextField(
                         value = age,
                         onValueChange = { age = it },
-                        label = { Text("Age") },
+                        label = { Text(stringResource(R.string.edit_profile_age_label)) },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                        colors = OutlinedTextFieldDefaults.colors(
+                            unfocusedBorderColor = MaterialTheme.colorScheme.surface,
+                            focusedBorderColor = MaterialTheme.colorScheme.primary
+                        ),
                         modifier = Modifier.weight(1f)
                     )
                     
                     OutlinedTextField(
                         value = height,
                         onValueChange = { height = it },
-                        label = { Text("Height (cm)") },
+                        label = { Text(stringResource(R.string.edit_profile_height_label)) },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                        colors = OutlinedTextFieldDefaults.colors(
+                            unfocusedBorderColor = MaterialTheme.colorScheme.surface,
+                            focusedBorderColor = MaterialTheme.colorScheme.primary
+                        ),
                         modifier = Modifier.weight(1f)
                     )
                 }
@@ -80,8 +98,12 @@ fun EditProfileDialog(
                 OutlinedTextField(
                     value = weight,
                     onValueChange = { weight = it },
-                    label = { Text("Weight (kg)") },
+                    label = { Text(stringResource(R.string.edit_profile_weight_label)) },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        unfocusedBorderColor = MaterialTheme.colorScheme.surface,
+                        focusedBorderColor = MaterialTheme.colorScheme.primary
+                    ),
                     modifier = Modifier.fillMaxWidth()
                 )
                 
@@ -92,26 +114,45 @@ fun EditProfileDialog(
                     onExpandedChange = { genderExpanded = !genderExpanded }
                 ) {
                     OutlinedTextField(
-                        value = gender.name,
+                        value = stringResource(gender.stringResourceId),
                         onValueChange = { },
                         readOnly = true,
-                        label = { Text("Gender") },
+                        label = { Text(stringResource(R.string.edit_profile_gender_label)) },
                         trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = genderExpanded) },
+                        colors = OutlinedTextFieldDefaults.colors(
+                            unfocusedBorderColor = MaterialTheme.colorScheme.surface,
+                            focusedBorderColor = MaterialTheme.colorScheme.primary
+                        ),
                         modifier = Modifier
                             .fillMaxWidth()
                             .menuAnchor()
                     )
                     ExposedDropdownMenu(
                         expanded = genderExpanded,
-                        onDismissRequest = { genderExpanded = false }
+                        onDismissRequest = { genderExpanded = false },
+                        modifier = Modifier
+                            .background(MaterialTheme.colorScheme.secondary)
+                            .border(
+                                width = 1.dp,
+                                color = MaterialTheme.colorScheme.surface,
+                                shape = RoundedCornerShape(4.dp)
+                            )
                     ) {
                         genderOptions.forEach { option ->
                             DropdownMenuItem(
-                                text = { Text(option.name) },
+                                text = { 
+                                    Text(
+                                        text = stringResource(option.stringResourceId),
+                                        color = MaterialTheme.colorScheme.onSecondary
+                                    ) 
+                                },
                                 onClick = {
                                     gender = option
                                     genderExpanded = false
-                                }
+                                },
+                                colors = MenuDefaults.itemColors(
+                                    textColor = MaterialTheme.colorScheme.onSecondary
+                                )
                             )
                         }
                     }
@@ -124,26 +165,45 @@ fun EditProfileDialog(
                     onExpandedChange = { activityExpanded = !activityExpanded }
                 ) {
                     OutlinedTextField(
-                        value = activityLevel.description,
+                        value = stringResource(activityLevel.stringResourceId),
                         onValueChange = { },
                         readOnly = true,
-                        label = { Text("Activity Level") },
+                        label = { Text(stringResource(R.string.edit_profile_activity_level_label)) },
                         trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = activityExpanded) },
+                        colors = OutlinedTextFieldDefaults.colors(
+                            unfocusedBorderColor = MaterialTheme.colorScheme.surface,
+                            focusedBorderColor = MaterialTheme.colorScheme.primary
+                        ),
                         modifier = Modifier
                             .fillMaxWidth()
                             .menuAnchor()
                     )
                     ExposedDropdownMenu(
                         expanded = activityExpanded,
-                        onDismissRequest = { activityExpanded = false }
+                        onDismissRequest = { activityExpanded = false },
+                        modifier = Modifier
+                            .background(MaterialTheme.colorScheme.secondary)
+                            .border(
+                                width = 1.dp,
+                                color = MaterialTheme.colorScheme.surface,
+                                shape = RoundedCornerShape(4.dp)
+                            )
                     ) {
                         activityOptions.forEach { option ->
                             DropdownMenuItem(
-                                text = { Text(option.description) },
+                                text = { 
+                                    Text(
+                                        text = stringResource(option.stringResourceId),
+                                        color = MaterialTheme.colorScheme.onSecondary
+                                    ) 
+                                },
                                 onClick = {
                                     activityLevel = option
                                     activityExpanded = false
-                                }
+                                },
+                                colors = MenuDefaults.itemColors(
+                                    textColor = MaterialTheme.colorScheme.onSecondary
+                                )
                             )
                         }
                     }
@@ -156,26 +216,45 @@ fun EditProfileDialog(
                     onExpandedChange = { goalExpanded = !goalExpanded }
                 ) {
                     OutlinedTextField(
-                        value = goal.description,
+                        value = stringResource(goal.stringResourceId),
                         onValueChange = { },
                         readOnly = true,
-                        label = { Text("Goal") },
+                        label = { Text(stringResource(R.string.edit_profile_goal_label)) },
                         trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = goalExpanded) },
+                        colors = OutlinedTextFieldDefaults.colors(
+                            unfocusedBorderColor = MaterialTheme.colorScheme.surface,
+                            focusedBorderColor = MaterialTheme.colorScheme.primary
+                        ),
                         modifier = Modifier
                             .fillMaxWidth()
                             .menuAnchor()
                     )
                     ExposedDropdownMenu(
                         expanded = goalExpanded,
-                        onDismissRequest = { goalExpanded = false }
+                        onDismissRequest = { goalExpanded = false },
+                        modifier = Modifier
+                            .background(MaterialTheme.colorScheme.secondary)
+                            .border(
+                                width = 1.dp,
+                                color = MaterialTheme.colorScheme.surface,
+                                shape = RoundedCornerShape(4.dp)
+                            )
                     ) {
                         goalOptions.forEach { option ->
                             DropdownMenuItem(
-                                text = { Text(option.description) },
+                                text = { 
+                                    Text(
+                                        text = stringResource(option.stringResourceId),
+                                        color = MaterialTheme.colorScheme.onSecondary
+                                    ) 
+                                },
                                 onClick = {
                                     goal = option
                                     goalExpanded = false
-                                }
+                                },
+                                colors = MenuDefaults.itemColors(
+                                    textColor = MaterialTheme.colorScheme.onSecondary
+                                )
                             )
                         }
                     }
@@ -186,16 +265,24 @@ fun EditProfileDialog(
                     OutlinedTextField(
                         value = targetWeight,
                         onValueChange = { targetWeight = it },
-                        label = { Text("Target Weight (kg)") },
+                        label = { Text(stringResource(R.string.edit_profile_target_weight_label)) },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+                        colors = OutlinedTextFieldDefaults.colors(
+                            unfocusedBorderColor = MaterialTheme.colorScheme.surface,
+                            focusedBorderColor = MaterialTheme.colorScheme.primary
+                        ),
                         modifier = Modifier.fillMaxWidth()
                     )
                     
                     OutlinedTextField(
                         value = timeFrame,
                         onValueChange = { timeFrame = it },
-                        label = { Text("Time Frame (weeks)") },
+                        label = { Text(stringResource(R.string.edit_profile_time_frame_label)) },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                        colors = OutlinedTextFieldDefaults.colors(
+                            unfocusedBorderColor = MaterialTheme.colorScheme.surface,
+                            focusedBorderColor = MaterialTheme.colorScheme.primary
+                        ),
                         modifier = Modifier.fillMaxWidth()
                     )
                 }
@@ -203,8 +290,12 @@ fun EditProfileDialog(
                 OutlinedTextField(
                     value = weeklyWorkouts,
                     onValueChange = { weeklyWorkouts = it },
-                    label = { Text("Weekly Workouts") },
+                    label = { Text(stringResource(R.string.edit_profile_weekly_workouts_label)) },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        unfocusedBorderColor = MaterialTheme.colorScheme.surface,
+                        focusedBorderColor = MaterialTheme.colorScheme.primary
+                    ),
                     modifier = Modifier.fillMaxWidth()
                 )
                 
@@ -213,10 +304,13 @@ fun EditProfileDialog(
                     horizontalArrangement = Arrangement.End
                 ) {
                     TextButton(onClick = onDismiss) {
-                        Text("Cancel")
+                        Text(
+                            text = stringResource(R.string.edit_profile_cancel),
+                            color = MaterialTheme.colorScheme.onSecondary
+                        )
                     }
                     
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.width(Dimensions.DialogButtonSpacing))
                     
                     Button(
                         onClick = {
@@ -234,7 +328,7 @@ fun EditProfileDialog(
                             onSave(updatedProfile)
                         }
                     ) {
-                        Text("Save")
+                        Text(stringResource(R.string.edit_profile_save))
                     }
                 }
             }

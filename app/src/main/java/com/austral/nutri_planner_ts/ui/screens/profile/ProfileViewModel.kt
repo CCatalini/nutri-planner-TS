@@ -2,6 +2,7 @@ package com.austral.nutri_planner_ts.ui.screens.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.austral.nutri_planner_ts.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -22,22 +23,23 @@ data class UserProfile(
     val weeklyWorkouts: Int = 0
 )
 
-enum class Gender {
-    MALE, FEMALE
+enum class Gender(val stringResourceId: Int) {
+    MALE(com.austral.nutri_planner_ts.R.string.edit_profile_gender_male),
+    FEMALE(com.austral.nutri_planner_ts.R.string.edit_profile_gender_female)
 }
 
-enum class ActivityLevel(val description: String, val multiplier: Float) {
-    SEDENTARY("Sedentario", 1.2f),
-    LIGHTLY_ACTIVE("Ligeramente activo", 1.375f),
-    MODERATELY_ACTIVE("Moderadamente activo", 1.55f),
-    VERY_ACTIVE("Muy activo", 1.725f),
-    EXTREMELY_ACTIVE("Extremadamente activo", 1.9f)
+enum class ActivityLevel(val stringResourceId: Int, val multiplier: Float) {
+    SEDENTARY(com.austral.nutri_planner_ts.R.string.activity_level_sedentary, com.austral.nutri_planner_ts.ui.theme.ApiConstants.SEDENTARY_MULTIPLIER),
+    LIGHTLY_ACTIVE(com.austral.nutri_planner_ts.R.string.activity_level_lightly_active, com.austral.nutri_planner_ts.ui.theme.ApiConstants.LIGHTLY_ACTIVE_MULTIPLIER),
+    MODERATELY_ACTIVE(com.austral.nutri_planner_ts.R.string.activity_level_moderately_active, com.austral.nutri_planner_ts.ui.theme.ApiConstants.MODERATELY_ACTIVE_MULTIPLIER),
+    VERY_ACTIVE(com.austral.nutri_planner_ts.R.string.activity_level_very_active, com.austral.nutri_planner_ts.ui.theme.ApiConstants.VERY_ACTIVE_MULTIPLIER),
+    EXTREMELY_ACTIVE(com.austral.nutri_planner_ts.R.string.activity_level_extremely_active, com.austral.nutri_planner_ts.ui.theme.ApiConstants.EXTREMELY_ACTIVE_MULTIPLIER)
 }
 
-enum class Goal(val description: String) {
-    LOSE_WEIGHT("Perder peso"),
-    MAINTAIN_WEIGHT("Mantener peso"),
-    GAIN_WEIGHT("Ganar peso")
+enum class Goal(val stringResourceId: Int) {
+    LOSE_WEIGHT(com.austral.nutri_planner_ts.R.string.goal_lose_weight),
+    MAINTAIN_WEIGHT(com.austral.nutri_planner_ts.R.string.goal_maintain_weight),
+    GAIN_WEIGHT(com.austral.nutri_planner_ts.R.string.goal_gain_weight)
 }
 
 data class MacroRecommendation(

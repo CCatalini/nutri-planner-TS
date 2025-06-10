@@ -118,4 +118,27 @@ object Dimensions {
     // Chart specific heights and spacings
     val ChartReferenceSpacing = 16.dp
     val ChartBarsSpacing = 8.dp
+    
+    // Font Sizes - Additional
+    val FontSizeTitle = 20.sp
+    val FontSizeSubtitle = 18.sp
+    val FontSizeBody = 16.sp
+    val FontSizeCaption = 14.sp
+    
+    // Card Elevations
+    val CardElevationDefault = 4.dp
+    val CardElevationDialog = 8.dp
+    
+    // Profile Specific Dimensions
+    val ProfileOptionsIconSize = 24.dp
+    val ProfileOptionsArrowSize = 20.dp
+    
+    // Dialog Dimensions
+    val DialogPadding = 16.dp
+    val DialogContentPadding = 24.dp
+    val DialogFieldSpacing = 16.dp
+    val DialogButtonSpacing = 8.dp
+    
+    // Chart Dimensions
+    val CalorieChartHeight = 200.dp
 }
