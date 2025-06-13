@@ -84,7 +84,7 @@ dependencies {
     // OkHttp interceptor for API calls
     implementation(libs.logging.interceptor)
     
-    // SharedPreferences para almacenar datos del usuario
+    // para almacenar datos del usuario
     implementation(libs.androidx.datastore.preferences)
 
     testImplementation(libs.junit)
