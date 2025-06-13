@@ -1,0 +1,213 @@
+<resources>
+    <string name="app_name">Nutri Planner</string>
+    <string name="app_name_display">Nutri Planner</string>
+    <!-- Web client ID remains the same -->
+    <string name="google_server_id">906915400849-kldf8je4oh2b9qghhgdi7p3dit7dmihu.apps.googleusercontent.com</string>
+
+    <!-- MacroSummary Strings -->
+    <string name="calories_label">Calorías</string>
+    <string name="calories_format">%1$d\nde %2$d</string>
+    <string name="protein_label">Proteínas</string>
+    <string name="fat_label">Grasas</string>
+    <string name="carbs_label">Carbohidratos</string>
+    <string name="macro_value_format">%1$d / %2$d g</string>
+
+    <!-- Meal Types -->
+    <string name="meal_type_breakfast">Desayuno</string>
+    <string name="meal_type_lunch">Almuerzo</string>
+    <string name="meal_type_dinner">Cena</string>
+    <string name="meal_type_snack">Merienda</string>
+
+    <!-- Meal Items -->
+    <string name="meal_apple">Manzana</string>
+    <string name="meal_chicken_salad">Ensalada de pollo</string>
+    <string name="meal_yogurt_berries">Yogur griego con bayas</string>
+    <string name="meal_salmon_quinoa">Salmón a la parrilla con quinoa</string>
+
+    <!-- Meal Item Details -->
+    <string name="preparation_time_format">%1$d min</string>
+    <string name="calories_amount_format">%1$d calorías</string>
+    <string name="time_calories_separator"> • </string>
+
+    <!-- Buttons -->
+    <string name="button_eaten">Consumido</string>
+    <string name="button_mark">Marcar</string>
+    <string name="button_swap">Cambiar</string>
+    <string name="button_add_meal">Agregar comida</string>
+    <string name="button_add">Agregar</string>
+    <string name="button_search">Buscar</string>
+    <string name="button_retry">Reintentar</string>
+    <string name="button_close">Cerrar</string>
+    <string name="button_sign_out">Cerrar sesión</string>
+    <string name="button_continue_google">Continuar con Google</string>
+
+    <!-- Content Descriptions -->
+    <string name="content_description_close">Cerrar</string>
+    <string name="content_description_search">Buscar</string>
+    <string name="content_description_remove_meal">Eliminar comida</string>
+
+    <!-- Dialog Titles -->
+    <string name="dialog_title_add_meal">Agregar comida</string>
+    <string name="dialog_title_food_details">Detalles del alimento</string>
+
+    <!-- Search and Results -->
+    <string name="search_hint_food">Buscar alimento</string>
+    <string name="search_hint_ingredients">Buscar ingredientes...</string>
+    <string name="search_results_title">Resultados de búsqueda</string>
+    <string name="search_no_results">No se encontraron resultados. Prueba un término diferente.</string>
+
+    <!-- Food Categories and Info -->
+    <string name="food_category_recipe">Receta</string>
+    <string name="meals">Comidas</string>
+
+    <!-- Detail Sections -->
+    <string name="section_basic_information">Información básica</string>
+    <string name="section_macronutrients">Macronutrientes</string>
+    <string name="section_other_nutrients">Otros nutrientes</string>
+    <string name="section_recipe_info">Información de la receta</string>
+
+    <!-- Food Detail Labels -->
+    <string name="label_amount">Cantidad</string>
+    <string name="label_category">Categoría</string>
+
+    <!-- Recipe Description -->
+    <string name="recipe_description">Esta es una receta completa con múltiples ingredientes e instrucciones de cocina.</string>
+
+    <!-- Error Messages -->
+    <string name="error_general">Ocurrió un error</string>
+    <string name="error_api_quota_exceeded">Se alcanzó el límite diario de la API. Por favor, inténtalo mañana.</string>
+    <string name="error_api_unauthorized">La autenticación de la API falló. Por favor, verifica tu conexión.</string>
+    <string name="error_api_rate_limit">Demasiadas solicitudes. Espera un momento e inténtalo de nuevo.</string>
+    <string name="error_network">Error de red. Por favor, comprueba tu conexión a Internet.</string>
+
+    <!-- Empty State Messages -->
+    <string name="empty_meals_title">Aún no se han añadido comidas</string>
+    <string name="empty_meals_subtitle">Toca el botón + para agregar tu primera comida</string>
+
+    <!-- Formats -->
+    <string name="nutrition_format" formatted="false">%.1f %s</string>
+    <string name="amount_unit_format" formatted="false">%s %s</string>
+
+    <!-- Recipe Prefix -->
+    <string name="recipe_prefix">🍽️ %s</string>
+
+    <!-- SearchBar -->
+    <string name="search_hint_default">Buscar</string>
+    <string name="content_description_search_icon">Icono de búsqueda</string>
+    <string name="content_description_clear_text">Borrar texto</string>
+
+    <!-- Screen Titles -->
+    <string name="screen_title_profile">Perfil</string>
+    <string name="screen_title_week">Semana</string>
+
+    <!-- Calories Format -->
+    <string name="calories_short_format">%d cal</string>
+
+    <!-- Default Macro Values -->
+    <string name="default_calories_goal">2000</string>
+    <string name="default_protein_goal">95</string>
+    <string name="default_fat_goal">60</string>
+    <string name="default_carbs_goal">150</string>
+
+    <!-- Profile Screen -->
+    <string name="profile_title">Perfil</string>
+    <string name="profile_user_name">Cami</string>
+    <string name="profile_subtitle">Toca las opciones de abajo para personalizar tu perfil</string>
+
+    <!-- Calorie Chart -->
+    <string name="calories_title">Calorías</string>
+    <string name="daily_average_format">Promedio diario %d kCal</string>
+    <string name="percentage_from_previous_week">100%% de la semana anterior</string>
+    <string name="chart_reference_value">2,400</string>
+    <string name="chart_legend_eaten">Consumido</string>
+    <string name="chart_legend_uneaten">No consumido</string>
+
+    <!-- Profile Options -->
+    <string name="profile_option_daily_calorie_goal">Objetivo calórico diario</string>
+    <string name="profile_option_plan_type">Tipo de plan</string>
+    <string name="profile_option_plan_type_flexible">Flexible</string>
+    <string name="profile_option_generate_recommendations">Generar recomendaciones</string>
+    <string name="profile_option_generate_subtitle">Obtén objetivos macro impulsados por IA</string>
+    <string name="profile_option_allergies">Alergias y disgustos</string>
+    <string name="profile_option_allergies_subtitle">Administra tus preferencias alimenticias</string>
+    <string name="profile_option_avatar">Avatar</string>
+    <string name="profile_option_avatar_subtitle">Personaliza tu foto de perfil</string>
+    <string name="calorie_goal_format">%d kCal</string>
+
+    <!-- Edit Profile Dialog -->
+    <string name="edit_profile_title">Editar perfil</string>
+    <string name="edit_profile_age_label">Edad</string>
+    <string name="edit_profile_gender_label">Género</string>
+    <string name="edit_profile_gender_male">Hombre</string>
+    <string name="edit_profile_gender_female">Mujer</string>
+    <string name="edit_profile_weight_label">Peso (kg)</string>
+    <string name="edit_profile_height_label">Altura (cm)</string>
+    <string name="edit_profile_save">Guardar</string>
+    <string name="edit_profile_cancel">Cancelar</string>
+
+    <!-- Chart Days -->
+    <string name="chart_day_monday">Lun</string>
+    <string name="chart_day_tuesday">Mar</string>
+    <string name="chart_day_wednesday">Mié</string>
+    <string name="chart_day_thursday">Jue</string>
+    <string name="chart_day_friday">Vie</string>
+    <string name="chart_day_saturday">Sáb</string>
+    <string name="chart_day_sunday">Dom</string>
+
+    <!-- Loading and Error States -->
+    <string name="loading_message">Cargando perfil...</string>
+    <string name="retry_button">Reintentar</string>
+
+    <!-- Profile Dialog and Options -->
+    <string name="profile_options_title">Opciones</string>
+    <string name="profile_option_edit_title">Editar perfil</string>
+    <string name="profile_option_edit_subtitle">Actualiza tu información personal</string>
+    <string name="profile_option_settings_title">Ajustes</string>
+    <string name="profile_option_settings_subtitle">Preferencias y notificaciones de la app</string>
+    <string name="profile_option_help_title">Ayuda y soporte</string>
+    <string name="profile_option_help_subtitle">Obtén ayuda y contacta con soporte</string>
+    <string name="profile_option_about_title">Acerca de</string>
+    <string name="profile_option_about_subtitle">Versión e información de la aplicación</string>
+
+    <!-- Edit Profile Labels -->
+    <string name="edit_profile_activity_level_label">Nivel de actividad</string>
+    <string name="edit_profile_goal_label">Objetivo</string>
+    <string name="edit_profile_target_weight_label">Peso objetivo (kg)</string>
+    <string name="edit_profile_time_frame_label">Periodo (semanas)</string>
+    <string name="edit_profile_weekly_workouts_label">Entrenamientos semanales</string>
+
+    <!-- Activity Levels -->
+    <string name="activity_level_sedentary">Sedentario</string>
+    <string name="activity_level_lightly_active">Ligeramente activo</string>
+    <string name="activity_level_moderately_active">Moderadamente activo</string>
+    <string name="activity_level_very_active">Muy activo</string>
+    <string name="activity_level_extremely_active">Extremadamente activo</string>
+
+    <!-- Goals -->
+    <string name="goal_lose_weight">Perder peso</string>
+    <string name="goal_maintain_weight">Mantener peso</string>
+    <string name="goal_gain_weight">Ganar peso</string>
+
+    <!-- Calorie Chart -->
+    <string name="calorie_chart_title">Consumo de calorías (últimos 7 días)</string>
+    <string name="chart_no_data">No hay datos disponibles</string>
+
+    <!-- Navigation Content Description -->
+    <string name="content_description_navigate">Navegar</string>
+
+    <!-- Macro Recommendation Explanation -->
+    <string name="macro_recommendation_explanation">Según tu perfil, aquí están tus valores de ingesta diaria recomendados. Este cálculo utiliza la ecuación de Mifflin-St Jeor para el BMR y se ajusta a tu nivel de actividad y objetivos.</string>
+
+    <string name="login_welcome">¡Bienvenido! \n\nInicia sesión con tu cuenta de Google para continuar.</string>
+
+    <string name="error_toast_general">Error: %1$s</string>
+    <string name="authenticate_biometrics">Autenticando biometría...</string>
+    <string name="greeting_hello_name">Hola %1$s!</string>
+
+    <string name="biometric_prompt_title">Autenticación biométrica</string>
+    <string name="biometric_prompt_subtitle">Inicia sesión usando tus credenciales biométricas</string>
+
+    <!-- Added for Macro Goals Card -->
+    <string name="macro_goals_title">Objetivos diarios</string>
+    <string name="target_weight_label">Peso objetivo</string>
+</resources> 
