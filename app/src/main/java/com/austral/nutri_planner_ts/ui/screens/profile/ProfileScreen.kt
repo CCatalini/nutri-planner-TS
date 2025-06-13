@@ -1,5 +1,6 @@
 package com.austral.nutri_planner_ts.ui.screens.profile
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -23,7 +24,9 @@ import com.austral.nutri_planner_ts.user.UserViewModel
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.ui.platform.LocalContext
+import com.austral.nutri_planner_ts.ui.components.MacroGoalsCard
 
+@SuppressLint("ContextCastToActivity")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Profile() {
@@ -31,6 +34,8 @@ fun Profile() {
     val activity = LocalContext.current as androidx.activity.ComponentActivity
     val userViewModel = hiltViewModel<UserViewModel>(activity)
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
+    val firebaseUser = userViewModel.userData.collectAsStateWithLifecycle().value
+    val userName = firebaseUser?.displayName ?: stringResource(R.string.profile_user_name)
     
     when (uiState) {
         is ProfileUiState.Loading -> {
@@ -47,7 +52,8 @@ fun Profile() {
                 uiState = uiState,
                 onUpdateProfile = viewModel::updateProfile,
                 onGenerateRecommendation = viewModel::generateMacroRecommendation,
-                onLogout = userViewModel::signOut
+                onLogout = userViewModel::signOut,
+                userName = userName
             )
         }
     }
@@ -107,7 +113,8 @@ private fun ProfileContent(
     uiState: ProfileUiState.Success,
     onUpdateProfile: (UserProfile) -> Unit,
     onGenerateRecommendation: () -> Unit,
-    onLogout: () -> Unit
+    onLogout: () -> Unit,
+    userName: String
 ) {
     var showEditDialog by remember { mutableStateOf(false) }
     
@@ -133,7 +140,17 @@ private fun ProfileContent(
         
         // User Info Section
         item {
-            UserInfoSection()
+            UserInfoSection(userName = userName)
+        }
+        
+        // Macro Goals Section (shows current recommended macros)
+        item {
+            uiState.macroRecommendation?.let { rec ->
+                MacroGoalsCard(
+                    recommendation = rec,
+                    targetWeight = uiState.userProfile.targetWeight
+                )
+            }
         }
         
         // Profile Options
@@ -213,35 +230,21 @@ private fun ProfileHeader() {
 }
 
 @Composable
-private fun UserInfoSection() {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(Dimensions.CornerRadiusMedium),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.secondary
-        ),
-        elevation = CardDefaults.cardElevation(defaultElevation = Dimensions.ProfileCardElevationLow)
+private fun UserInfoSection(userName: String) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = Dimensions.PaddingMedium, vertical = Dimensions.SpacerMedium),
+        horizontalAlignment = Alignment.Start
     ) {
-        Column(
-            modifier = Modifier.padding(Dimensions.PaddingLarge),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = stringResource(R.string.profile_user_name),
-                style = MaterialTheme.typography.headlineMedium,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onSecondary
-            )
-            
-            Spacer(modifier = Modifier.height(Dimensions.SpacerSmall))
-            
-            Text(
-                text = stringResource(R.string.profile_subtitle),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSecondary.copy(alpha = 0.7f),
-                textAlign = TextAlign.Center
-            )
-        }
+        Text(
+            text = userName,
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.onBackground
+        )
+        Spacer(modifier = Modifier.height(Dimensions.SpacerSmall))
+        Divider(color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.2f))
     }
 }
 

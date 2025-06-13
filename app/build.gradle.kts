@@ -28,8 +28,6 @@ android {
         }
 
         buildConfigField("String", "SPOONACULAR_API_KEY", "\"${localProperties.getProperty("spoonacular.api.key", "")}\"")
-        buildConfigField("String", "OPENAI_API_KEY", "\"${localProperties.getProperty("openai.api.key", "")}\"")
-        buildConfigField("String", "CLAUDE_API_KEY", "\"${localProperties.getProperty("claude.api.key", "")}\"")
     }
 
     buildTypes {

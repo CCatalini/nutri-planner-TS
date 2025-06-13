@@ -63,4 +63,7 @@ class ProfileRepository @Inject constructor(
     fun getRecommendedMacros(): MacroRecommendation? {
         return _macroRecommendation.value
     }
+
+    // Add public accessor to observe changes in macro recommendations
+    fun macroRecommendationFlow() = _macroRecommendation as kotlinx.coroutines.flow.StateFlow<MacroRecommendation?>
 } 

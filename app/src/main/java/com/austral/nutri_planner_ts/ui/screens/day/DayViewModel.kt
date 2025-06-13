@@ -44,6 +44,7 @@ class DayViewModel @Inject constructor(
 
     init {
         loadDayMeals()
+        observeMacroRecommendations()
     }
 
     fun retry() {
@@ -365,6 +366,23 @@ class DayViewModel @Inject constructor(
                 profileRepository.addDailyEntry(dailyEntry)
             } catch (e: Exception) {
                 // Handle error silently
+            }
+        }
+    }
+
+    private fun observeMacroRecommendations() {
+        viewModelScope.launch {
+            profileRepository.macroRecommendationFlow().collect { recommendation ->
+                val currentState = _uiState.value
+                if (currentState is DayUiState.Success && recommendation != null) {
+                    val updatedMacroData = currentState.macroData.copy(
+                        caloriesGoal = recommendation.calories,
+                        proteinGoal = recommendation.protein,
+                        fatGoal = recommendation.fat,
+                        carbsGoal = recommendation.carbs
+                    )
+                    _uiState.value = currentState.copy(macroData = updatedMacroData)
+                }
             }
         }
     }

@@ -206,4 +206,8 @@
 
     <string name="biometric_prompt_title">Biometric Authentication</string>
     <string name="biometric_prompt_subtitle">Log in using your biometric credentials</string>
+
+    <!-- Added for Macro Goals Card -->
+    <string name="macro_goals_title">Daily goals</string>
+    <string name="target_weight_label">Target weight</string>
 </resources>

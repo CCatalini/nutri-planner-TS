@@ -56,41 +56,7 @@ fun ProfileOptionsSection(
                 onClick = onEditProfile
             )
             
-            Divider(
-                modifier = Modifier.padding(vertical = Dimensions.SpacerSmall),
-                color = MaterialTheme.colorScheme.onSecondary.copy(alpha = 0.2f)
-            )
-            
-            ProfileOption(
-                icon = Icons.Default.Settings,
-                title = stringResource(R.string.profile_option_settings_title),
-                subtitle = stringResource(R.string.profile_option_settings_subtitle),
-                onClick = onSettings
-            )
-            
-            Divider(
-                modifier = Modifier.padding(vertical = Dimensions.SpacerSmall),
-                color = MaterialTheme.colorScheme.onSecondary.copy(alpha = 0.2f)
-            )
-            
-            ProfileOption(
-                icon = Icons.Default.Phone,
-                title = stringResource(R.string.profile_option_help_title),
-                subtitle = stringResource(R.string.profile_option_help_subtitle),
-                onClick = onHelp
-            )
-            
-            Divider(
-                modifier = Modifier.padding(vertical = Dimensions.SpacerSmall),
-                color = MaterialTheme.colorScheme.onSecondary.copy(alpha = 0.2f)
-            )
-            
-            ProfileOption(
-                icon = Icons.Default.Info,
-                title = stringResource(R.string.profile_option_about_title),
-                subtitle = stringResource(R.string.profile_option_about_subtitle),
-                onClick = onAbout
-            )
+            // No more options below.
         }
     }
 }
