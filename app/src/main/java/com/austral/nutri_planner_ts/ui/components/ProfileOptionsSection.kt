@@ -18,6 +18,10 @@ import com.austral.nutri_planner_ts.ui.theme.Dimensions
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileOptionsSection(
+    profile: com.austral.nutri_planner_ts.ui.screens.profile.UserProfile,
+    recommendation: com.austral.nutri_planner_ts.ui.screens.profile.MacroRecommendation?,
+    isGenerating: Boolean = false,
+    onGenerateRecommendation: () -> Unit,
     onEditProfile: () -> Unit,
     onSettings: () -> Unit = {},
     onHelp: () -> Unit = {},

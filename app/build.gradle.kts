@@ -87,6 +87,9 @@ dependencies {
     // para almacenar datos del usuario
     implementation(libs.androidx.datastore.preferences)
 
+    // biometric auth
+    implementation("androidx.biometric:biometric:1.2.0-alpha05")
+
     testImplementation(libs.junit)
 
     androidTestImplementation(libs.androidx.junit)
