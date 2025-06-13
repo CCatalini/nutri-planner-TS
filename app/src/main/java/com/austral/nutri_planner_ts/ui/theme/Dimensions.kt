@@ -28,6 +28,7 @@ object Dimensions {
     val IconSizeSmall = 16.dp
     val IconSizeMedium = 24.dp
     val IconSizeLarge = 32.dp
+    val IconSizeExtraLarge = 80.dp
     val IconSizeExtraSmall = 18.dp
     val IconSizeClose = 20.dp
 
@@ -70,7 +71,9 @@ object Dimensions {
     val FontSmall = 12.sp
     val FontMedium = 14.sp
     val FontLarge = 18.sp
-    val FontExtraLarge = 20.sp
+    val FontTitle = 35.sp
+    val FontSubtitle = 20.sp
+    val FontTitleButton = 16.sp
 
     // Sizes
     val Default = 0.dp
@@ -105,6 +108,7 @@ object Dimensions {
     // Profile Screen Specific
     val ProfileIconBackgroundSize = 48.dp
     val ProfileOptionIconSize = 24.dp
+    val ProfileAvatarSize = 64.dp
     val ProfileChartBarWidth = 32.dp
     val ProfileChartHeight = 120.dp
     val ProfileChartBarMinHeight = 20.dp

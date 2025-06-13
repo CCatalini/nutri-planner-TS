@@ -78,7 +78,7 @@ fun MacrosSummary(macroData: MacroData = MacroData()) {
                 Spacer(modifier = Modifier.height(Dimensions.SpacerMedium))
                 Text(
                     text = "${macroData.caloriesConsumed} / ${macroData.caloriesGoal}",
-                    style = MaterialTheme.typography.titleLarge,
+                    style = MaterialTheme.typography.bodyLarge,
                     color = if (isCaloriesOverGoal) Color.Red else MaterialTheme.colorScheme.onBackground,
                     textAlign = TextAlign.Center
                 )

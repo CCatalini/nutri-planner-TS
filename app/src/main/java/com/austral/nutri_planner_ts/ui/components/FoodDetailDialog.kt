@@ -172,7 +172,7 @@ private fun BasicInfoSection(foodItem: IngredientSearchResult, nutritionInfo: In
         ) {
             Text(
                 text = stringResource(R.string.section_basic_information),
-                style = MaterialTheme.typography.titleMedium,
+                style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.Bold
             )
             
@@ -212,7 +212,7 @@ private fun MacronutrientsSection(nutritionInfo: IngredientInformation) {
             ) {
                 Text(
                     text = stringResource(R.string.section_macronutrients),
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold
                 )
                 
@@ -250,7 +250,7 @@ private fun OtherNutrientsSection(nutritionInfo: IngredientInformation) {
             ) {
                 Text(
                     text = stringResource(R.string.section_other_nutrients),
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold
                 )
                 
@@ -283,7 +283,7 @@ private fun RecipeInfoSection() {
         ) {
             Text(
                 text = stringResource(R.string.section_recipe_info),
-                style = MaterialTheme.typography.titleMedium,
+                style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.Bold
             )
             

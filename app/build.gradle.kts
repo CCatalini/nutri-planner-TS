@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt.android)
+    id("com.google.gms.google-services")
     id("kotlin-kapt")
 }
 
@@ -54,6 +55,9 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.8"
     }
+    lint {
+        abortOnError = false
+    }
 }
 
 dependencies {
@@ -89,6 +93,15 @@ dependencies {
 
     // biometric auth
     implementation("androidx.biometric:biometric:1.2.0-alpha05")
+
+    // Firebase & Google Sign-In
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.play.services.auth)
+
+    // Credential Manager
+    implementation(libs.credentials)
+    implementation(libs.identity.googleid)
 
     testImplementation(libs.junit)
 

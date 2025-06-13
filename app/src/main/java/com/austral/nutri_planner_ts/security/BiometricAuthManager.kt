@@ -48,8 +48,8 @@ class BiometricAuthManager @Inject constructor() {
                 BiometricManager.Authenticators.BIOMETRIC_STRONG or
                         BiometricManager.Authenticators.DEVICE_CREDENTIAL
             )
-            .setTitle("Biometric Authentication")
-            .setSubtitle("Log in using your biometric credentials")
+            .setTitle(context.getString(com.austral.nutri_planner_ts.R.string.biometric_prompt_title))
+            .setSubtitle(context.getString(com.austral.nutri_planner_ts.R.string.biometric_prompt_subtitle))
             .build()
 
         biometricPrompt.authenticate(promptInfo)

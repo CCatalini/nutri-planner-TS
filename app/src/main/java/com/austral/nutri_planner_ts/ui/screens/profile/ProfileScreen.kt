@@ -1,5 +1,6 @@
 package com.austral.nutri_planner_ts.ui.screens.profile
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -18,11 +19,17 @@ import com.austral.nutri_planner_ts.ui.components.CalorieChartCard
 import com.austral.nutri_planner_ts.ui.components.EditProfileDialog
 import com.austral.nutri_planner_ts.ui.components.ProfileOptionsSection
 import com.austral.nutri_planner_ts.ui.theme.Dimensions
+import com.austral.nutri_planner_ts.user.UserViewModel
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ExitToApp
+import androidx.compose.ui.platform.LocalContext
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Profile() {
     val viewModel = hiltViewModel<ProfileViewModel>()
+    val activity = LocalContext.current as androidx.activity.ComponentActivity
+    val userViewModel = hiltViewModel<UserViewModel>(activity)
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
     
     when (uiState) {
@@ -39,7 +46,8 @@ fun Profile() {
             ProfileContent(
                 uiState = uiState,
                 onUpdateProfile = viewModel::updateProfile,
-                onGenerateRecommendation = viewModel::generateMacroRecommendation
+                onGenerateRecommendation = viewModel::generateMacroRecommendation,
+                onLogout = userViewModel::signOut
             )
         }
     }
@@ -98,7 +106,8 @@ private fun ErrorScreen(
 private fun ProfileContent(
     uiState: ProfileUiState.Success,
     onUpdateProfile: (UserProfile) -> Unit,
-    onGenerateRecommendation: () -> Unit
+    onGenerateRecommendation: () -> Unit,
+    onLogout: () -> Unit
 ) {
     var showEditDialog by remember { mutableStateOf(false) }
     
@@ -136,6 +145,35 @@ private fun ProfileContent(
                 onGenerateRecommendation = onGenerateRecommendation,
                 onEditProfile = { showEditDialog = true }
             )
+        }
+        
+        // Logout Button
+        item {
+            Spacer(modifier = Modifier.height(Dimensions.SpacerMedium))
+            Button(
+                onClick = onLogout,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = Dimensions.PaddingMedium),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary
+                ),
+                border = BorderStroke(Dimensions.fineLine, MaterialTheme.colorScheme.surface)
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Icon(
+                        Icons.Filled.ExitToApp,
+                        contentDescription = stringResource(id = R.string.button_sign_out)
+                    )
+                    Spacer(modifier = Modifier.width(Dimensions.SpacerSmall))
+                    Text(stringResource(id = R.string.button_sign_out))
+                }
+            }
         }
         
         // Bottom spacing for navigation

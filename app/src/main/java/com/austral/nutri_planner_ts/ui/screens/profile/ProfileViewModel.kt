@@ -161,7 +161,7 @@ class ProfileViewModel @Inject constructor(
                     dailyHistory = history
                 )
             } catch (e: Exception) {
-                _uiState.value = ProfileUiState.Error("Error al cargar el perfil: ${e.message}")
+                _uiState.value = ProfileUiState.Error("Error loading profile: ${e.message}")
             }
         }
     }
@@ -175,7 +175,7 @@ class ProfileViewModel @Inject constructor(
                     _uiState.value = currentState.copy(userProfile = profile)
                 }
             } catch (e: Exception) {
-                _uiState.value = ProfileUiState.Error("Error al guardar el perfil: ${e.message}")
+                _uiState.value = ProfileUiState.Error("Error saving profile: ${e.message}")
             }
         }
     }
@@ -196,7 +196,7 @@ class ProfileViewModel @Inject constructor(
                     )
                 } catch (e: Exception) {
                     _uiState.value = currentState.copy(isGeneratingRecommendation = false)
-                    _uiState.value = ProfileUiState.Error("Error al generar recomendación: ${e.message}")
+                    _uiState.value = ProfileUiState.Error("Error generating recommendation: ${e.message}")
                 }
             }
         }
@@ -212,7 +212,7 @@ class ProfileViewModel @Inject constructor(
                     _uiState.value = currentState.copy(dailyHistory = updatedHistory)
                 }
             } catch (e: Exception) {
-                _uiState.value = ProfileUiState.Error("Error al agregar entrada diaria: ${e.message}")
+                _uiState.value = ProfileUiState.Error("Error adding daily entry: ${e.message}")
             }
         }
     }

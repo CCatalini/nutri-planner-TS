@@ -228,7 +228,7 @@ private fun MacroDetailsContent(entry: DailyEntry) {
     ) {
         Text(
             text = entry.date,
-            style = MaterialTheme.typography.titleMedium,
+            style = MaterialTheme.typography.bodyMedium,
             fontWeight = FontWeight.Bold
         )
         Divider()

@@ -77,7 +77,7 @@ fun RecipeCard(
                     // Title - Larger text
                     Text(
                         text = ingredient.name,
-                        style = MaterialTheme.typography.titleLarge,
+                        style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.onSecondary,
                         maxLines = 2,
