@@ -90,7 +90,69 @@ class ProfileViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val profile = profileRepository.getProfile()
-                val history = profileRepository.getDailyHistory()
+                var history = profileRepository.getDailyHistory()
+                
+                val todayStr = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault()).format(java.util.Date())
+
+                // If no history for past days (ignoring today), populate examples
+                if (history.filter { it.date != todayStr }.isEmpty()) {
+                    val sdf = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
+                    val calendar = java.util.Calendar.getInstance()
+                    val sampleList = mutableListOf<DailyEntry>()
+
+                    // Fixed historical samples provided by UI for visualisation
+                    val dates = listOf("2025-06-12","2025-06-11","2025-06-10","2025-06-09","2025-06-08")
+                    val caloriesList = listOf(2150, 2200, 2050, 2300, 2100)
+                    val proteinList = listOf(110, 120, 100, 130, 105)
+                    val fatList = listOf(75, 70, 80, 78, 72)
+                    val carbsList = listOf(240, 250, 220, 260, 230)
+
+                    dates.forEachIndexed { idx, dateStr ->
+                        val cal = caloriesList[idx]
+                        val prot = proteinList[idx]
+                        val fat = fatList[idx]
+                        val carbs = carbsList[idx]
+                        sampleList.add(
+                            DailyEntry(
+                                date = dateStr,
+                                consumedCalories = cal,
+                                consumedProtein = prot,
+                                consumedCarbs = carbs,
+                                consumedFat = fat,
+                                recommendedCalories = 2000,
+                                recommendedProtein = 100,
+                                recommendedCarbs = 250,
+                                recommendedFat = 67
+                            )
+                        )
+                    }
+
+                    // Generate random entries for remaining days up to 14
+                    for (daysAgo in 1..14) {
+                        calendar.time = java.util.Date()
+                        calendar.add(java.util.Calendar.DATE, -daysAgo)
+                        val dateStr = sdf.format(calendar.time)
+                        if (sampleList.none { it.date == dateStr }) {
+                            sampleList.add(
+                                DailyEntry(
+                                    date = dateStr,
+                                    consumedCalories = (1500..2500).random(),
+                                    consumedProtein = (60..150).random(),
+                                    consumedCarbs = (150..350).random(),
+                                    consumedFat = (40..100).random(),
+                                    recommendedCalories = 2000,
+                                    recommendedProtein = 100,
+                                    recommendedCarbs = 250,
+                                    recommendedFat = 67
+                                )
+                            )
+                        }
+                    }
+
+                    sampleList.forEach { profileRepository.addDailyEntry(it) }
+                    history = profileRepository.getDailyHistory()
+                }
+                
                 val recommendation = profileRepository.getMacroRecommendation()
                 
                 _uiState.value = ProfileUiState.Success(

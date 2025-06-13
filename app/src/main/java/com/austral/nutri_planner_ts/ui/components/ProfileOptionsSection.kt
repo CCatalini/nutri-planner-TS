@@ -9,11 +9,8 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.res.stringResource
 import com.austral.nutri_planner_ts.R
 import com.austral.nutri_planner_ts.ui.theme.Dimensions
@@ -21,10 +18,6 @@ import com.austral.nutri_planner_ts.ui.theme.Dimensions
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileOptionsSection(
-    profile: com.austral.nutri_planner_ts.ui.screens.profile.UserProfile,
-    recommendation: com.austral.nutri_planner_ts.ui.screens.profile.MacroRecommendation?,
-    isGenerating: Boolean = false,
-    onGenerateRecommendation: () -> Unit,
     onEditProfile: () -> Unit,
     onSettings: () -> Unit = {},
     onHelp: () -> Unit = {},
@@ -110,7 +103,7 @@ private fun ProfileOption(
         modifier = modifier
             .fillMaxWidth()
             .clickable { onClick() }
-            .padding(vertical = 8.dp),
+            .padding(vertical = Dimensions.SpacerSmall),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(

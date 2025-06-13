@@ -4,6 +4,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 object Dimensions {
+    val fineLine = 1.dp
+
     // Padding
     val PaddingSmall = 4.dp
     val PaddingSmallMed = 12.dp
@@ -140,5 +142,18 @@ object Dimensions {
     val DialogButtonSpacing = 8.dp
     
     // Chart Dimensions
-    val CalorieChartHeight = 200.dp
+    val CalorieChartHeight = 260.dp
+
+    // Calorie Chart specific
+    val CalorieChartDayWidth = 56.dp
+    val CalorieChartPointRadius = 4.dp
+    val CalorieChartLineStroke = 1.dp
+    val CalorieChartDashLength = 8.dp
+
+    val CalorieChartYAxisLabelWidth = 48.dp
+    val CalorieChartLabelPadding = 4.dp
+
+    // Misc small sizes
+    val CornerRadiusExtraSmall = 4.dp
+    val BorderWidthSmall = 1.dp
 }
