@@ -101,6 +101,9 @@ dependencies {
     implementation(libs.credentials)
     implementation(libs.identity.googleid)
 
+    // notifications
+    implementation(libs.accompanist.permissions)
+
     testImplementation(libs.junit)
 
     androidTestImplementation(libs.androidx.junit)
