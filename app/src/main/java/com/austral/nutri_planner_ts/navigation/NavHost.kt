@@ -24,9 +24,10 @@ fun NavHostComposable(innerPadding: PaddingValues, navController: NavHostControl
             .padding(innerPadding)
             .padding(PaddingLarge)
     ){
-        composable(route = ScreenNames.Day.name) { Day() }
+        composable(route = ScreenNames.Day.name) { Day(navController) }
         composable(route = ScreenNames.Recipes.name) { Recipes() }
         composable(route = ScreenNames.Profile.name) { Profile() }
+        composable(route = ScreenNames.Notification.name) { com.austral.nutri_planner_ts.ui.screens.notification.NotificationScreen() }
     }
 }
 
