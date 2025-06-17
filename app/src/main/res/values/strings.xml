@@ -210,4 +210,9 @@
     <!-- Added for Macro Goals Card -->
     <string name="macro_goals_title">Daily goals</string>
     <string name="target_weight_label">Target weight</string>
+
+    <!-- Notification strings -->
+    <string name="notification_default_message">See you on Nutri Planner</string>
+    <string name="notification_channel_name">Nutri Planner Alerts</string>
+    <string name="notification_channel_description">Reminders and alerts from Nutri Planner</string>
 </resources>

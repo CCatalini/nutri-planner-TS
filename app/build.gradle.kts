@@ -62,6 +62,7 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
@@ -72,7 +73,7 @@ dependencies {
     //Hilt
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.hilt.android)
-    implementation(libs.androidx.lifecycle.runtime.compose.android)
+    implementation(libs.androidx.lifecycle.runtime.compose)
     kapt(libs.hilt.android.compiler)
 
     // Retrofit
@@ -101,7 +102,6 @@ dependencies {
     implementation(libs.credentials)
     implementation(libs.identity.googleid)
 
-    // notifications
     implementation(libs.accompanist.permissions)
 
     testImplementation(libs.junit)
