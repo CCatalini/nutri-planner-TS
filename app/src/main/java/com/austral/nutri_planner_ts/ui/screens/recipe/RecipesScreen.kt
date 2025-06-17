@@ -69,7 +69,7 @@ fun Recipes() {
                 )
             }
             is RecipesUiState.Error -> {
-                Text(stringResource(R.string.error_general))
+                Text(stringResource(R.string.error_api_quota_exceeded))
                 Button(onClick = viewModel::retry) {
                     Text(stringResource(R.string.button_retry))
                 }

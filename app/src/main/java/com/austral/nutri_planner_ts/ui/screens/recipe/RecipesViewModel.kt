@@ -55,10 +55,10 @@ class RecipesViewModel @Inject constructor(
             delay(300) // Debounce
             
             if (query.isNotEmpty()) {
-                apiServiceImpl.searchIngredients(
+                apiServiceImpl.searchFood(
                     query = query,
-                    onSuccess = { ingredients ->
-                        _uiState.value = RecipesUiState.Success(ingredients)
+                    onSuccess = { results ->
+                        _uiState.value = RecipesUiState.Success(results)
                     },
                     onFail = {
                         _uiState.value = RecipesUiState.Error
@@ -66,29 +66,50 @@ class RecipesViewModel @Inject constructor(
                     loadingFinished = { }
                 )
             } else {
-                // Popular ingredient queries for initial display
-                val queries = listOf(
-                    "chicken", "beef", "salmon", "rice", "pasta",
-                    "tomato", "onion", "garlic", "apple", "banana",
-                    "cheese", "milk", "egg", "potato", "carrot"
+                // 15 healthy recipe ideas for initial display
+                val recipeQueries = listOf(
+                    "grilled chicken salad",
+                    "quinoa bowl",
+                    "baked salmon",
+                    "veggie stir fry",
+                    "lentil soup",
+                    "oatmeal pancakes",
+                    "turkey lettuce wraps",
+                    "avocado toast",
+                    "greek yogurt parfait",
+                    "black bean tacos",
+                    "zucchini noodles pesto",
+                    "chickpea curry",
+                    "spinach smoothie",
+                    "cauliflower rice stir fry",
+                    "sweet potato hash",
+                    "kale quinoa salad",
+                    "grilled shrimp skewers",
+                    "mediterranean buddha bowl",
+                    "broccoli cheddar egg muffins",
+                    "roasted chickpea salad",
+                    "tofu veggie wrap",
+                    "banana protein pancakes",
+                    "mushroom spinach omelette",
+                    "salmon poke bowl"
                 )
 
                 val collectedIngredients = mutableListOf<IngredientSearchResult>()
                 var completed = 0
 
-                queries.forEach { ingredient ->
-                    apiServiceImpl.searchIngredients(
-                        query = ingredient,
-                        onSuccess = { ingredients ->
-                            ingredients.firstOrNull()?.let { collectedIngredients.add(it) }
+                recipeQueries.forEach { recipeQuery ->
+                    apiServiceImpl.searchFood(
+                        query = recipeQuery,
+                        onSuccess = { results ->
+                            results.firstOrNull()?.let { collectedIngredients.add(it) }
                             completed++
-                            if (completed == queries.size) {
+                            if (completed == recipeQueries.size) {
                                 _uiState.value = RecipesUiState.Success(collectedIngredients)
                             }
                         },
                         onFail = {
                             completed++
-                            if (completed == queries.size) {
+                            if (completed == recipeQueries.size) {
                                 _uiState.value = RecipesUiState.Success(collectedIngredients)
                             }
                         },

@@ -5,6 +5,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -12,14 +13,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
 import com.austral.nutri_planner_ts.R
 import com.austral.nutri_planner_ts.ui.components.MacrosSummary
 import com.austral.nutri_planner_ts.ui.components.RecipeCard
 import com.austral.nutri_planner_ts.ui.components.AddMealDialog
 import com.austral.nutri_planner_ts.ui.theme.Dimensions
+import com.austral.nutri_planner_ts.navigation.ScreenNames
 
 @Composable
-fun Day() {
+fun Day(navController: NavHostController) {
     val viewModel = hiltViewModel<DayViewModel>()
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
     var showAddMealDialog by remember { mutableStateOf(false) }
@@ -30,6 +33,19 @@ fun Day() {
             .padding(Dimensions.PaddingMedium)
             .fillMaxSize()
     ) {
+        // Botón pequeño para ir a la pantalla de notificaciones
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.End
+        ) {
+            IconButton(onClick = { navController.navigate("${ScreenNames.Notification.name}") }) {
+                Icon(
+                    imageVector = Icons.Default.Notifications,
+                    contentDescription = stringResource(R.string.notification_channel_name),
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            }
+        }
         // Show MacrosSummary with calculated data when available
         when (uiState) {
             is DayUiState.Success -> {

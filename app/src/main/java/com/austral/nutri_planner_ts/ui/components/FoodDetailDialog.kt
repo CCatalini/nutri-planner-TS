@@ -2,7 +2,6 @@ package com.austral.nutri_planner_ts.ui.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -15,7 +14,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import coil.compose.AsyncImage
 import com.austral.nutri_planner_ts.R
@@ -174,7 +172,7 @@ private fun BasicInfoSection(foodItem: IngredientSearchResult, nutritionInfo: In
         ) {
             Text(
                 text = stringResource(R.string.section_basic_information),
-                style = MaterialTheme.typography.titleMedium,
+                style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.Bold
             )
             
@@ -214,7 +212,7 @@ private fun MacronutrientsSection(nutritionInfo: IngredientInformation) {
             ) {
                 Text(
                     text = stringResource(R.string.section_macronutrients),
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold
                 )
                 
@@ -252,7 +250,7 @@ private fun OtherNutrientsSection(nutritionInfo: IngredientInformation) {
             ) {
                 Text(
                     text = stringResource(R.string.section_other_nutrients),
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold
                 )
                 
@@ -285,7 +283,7 @@ private fun RecipeInfoSection() {
         ) {
             Text(
                 text = stringResource(R.string.section_recipe_info),
-                style = MaterialTheme.typography.titleMedium,
+                style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.Bold
             )
             

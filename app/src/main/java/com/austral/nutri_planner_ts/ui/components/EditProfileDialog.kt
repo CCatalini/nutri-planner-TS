@@ -7,12 +7,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.res.stringResource
 import com.austral.nutri_planner_ts.R
@@ -133,9 +130,9 @@ fun EditProfileDialog(
                         modifier = Modifier
                             .background(MaterialTheme.colorScheme.secondary)
                             .border(
-                                width = 1.dp,
+                                width = Dimensions.BorderWidthSmall,
                                 color = MaterialTheme.colorScheme.surface,
-                                shape = RoundedCornerShape(4.dp)
+                                shape = RoundedCornerShape(Dimensions.CornerRadiusExtraSmall)
                             )
                     ) {
                         genderOptions.forEach { option ->
@@ -184,9 +181,9 @@ fun EditProfileDialog(
                         modifier = Modifier
                             .background(MaterialTheme.colorScheme.secondary)
                             .border(
-                                width = 1.dp,
+                                width = Dimensions.BorderWidthSmall,
                                 color = MaterialTheme.colorScheme.surface,
-                                shape = RoundedCornerShape(4.dp)
+                                shape = RoundedCornerShape(Dimensions.CornerRadiusExtraSmall)
                             )
                     ) {
                         activityOptions.forEach { option ->
@@ -235,9 +232,9 @@ fun EditProfileDialog(
                         modifier = Modifier
                             .background(MaterialTheme.colorScheme.secondary)
                             .border(
-                                width = 1.dp,
+                                width = Dimensions.BorderWidthSmall,
                                 color = MaterialTheme.colorScheme.surface,
-                                shape = RoundedCornerShape(4.dp)
+                                shape = RoundedCornerShape(Dimensions.CornerRadiusExtraSmall)
                             )
                     ) {
                         goalOptions.forEach { option ->

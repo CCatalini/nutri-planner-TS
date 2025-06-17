@@ -19,11 +19,15 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import com.austral.nutri_planner_ts.data.DataStoreManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 @HiltViewModel
 class DayViewModel @Inject constructor(
     private val apiServiceImpl: ApiServiceImpl,
     private val profileRepository: com.austral.nutri_planner_ts.ui.screens.profile.ProfileRepository,
+    private val dataStoreManager: DataStoreManager,
     @ApplicationContext private val context: Context
 ) : ViewModel() {
 
@@ -40,6 +44,7 @@ class DayViewModel @Inject constructor(
 
     init {
         loadDayMeals()
+        observeMacroRecommendations()
     }
 
     fun retry() {
@@ -48,18 +53,39 @@ class DayViewModel @Inject constructor(
 
     private fun loadDayMeals() {
         _uiState.value = DayUiState.Loading
-        
-        // Start with empty lists - user will add meals manually
-        currentMeals.clear()
-        currentNutrition.clear()
-        
-        val macroData = calculateMacros(currentNutrition)
-        _uiState.value = DayUiState.Success(
-            meals = currentMeals.toList(),
-            macroData = macroData,
-            searchResults = emptyList(),
-            nutritionList = currentNutrition.toList()
-        )
+
+        viewModelScope.launch {
+            currentMeals.clear()
+            currentNutrition.clear()
+
+            val today = formatToday()
+
+            val (savedMeals, savedNutrition) = withContext(Dispatchers.IO) {
+                dataStoreManager.getMealsForDate(today)
+            }
+
+            currentMeals.addAll(savedMeals)
+            currentNutrition.addAll(savedNutrition)
+
+            val macroData = calculateMacros(currentNutrition)
+            _uiState.value = DayUiState.Success(
+                meals = currentMeals.toList(),
+                macroData = macroData,
+                searchResults = emptyList(),
+                nutritionList = currentNutrition.toList()
+            )
+        }
+    }
+
+    private fun persistMeals() {
+        viewModelScope.launch(Dispatchers.IO) {
+            dataStoreManager.saveMeals(formatToday(), currentMeals, currentNutrition)
+        }
+    }
+
+    private fun formatToday(): String {
+        return java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
+            .format(java.util.Date())
     }
 
     fun searchMeals(query: String) {
@@ -126,6 +152,7 @@ class DayViewModel @Inject constructor(
                                 searchResults = emptyList(),
                                 nutritionList = currentNutrition.toList()
                             )
+                            persistMeals()
                         },
                         onFail = {
                             // If it fails, add without macros
@@ -136,6 +163,7 @@ class DayViewModel @Inject constructor(
                                 searchResults = emptyList(),
                                 nutritionList = currentNutrition.toList()
                             )
+                            persistMeals()
                         },
                         loadingFinished = {}
                     )
@@ -156,6 +184,7 @@ class DayViewModel @Inject constructor(
                                 searchResults = emptyList(),
                                 nutritionList = currentNutrition.toList()
                             )
+                            persistMeals()
                         },
                         onFail = {
                             val updatedMacroData = calculateMacros(currentNutrition)
@@ -165,6 +194,7 @@ class DayViewModel @Inject constructor(
                                 searchResults = emptyList(),
                                 nutritionList = currentNutrition.toList()
                             )
+                            persistMeals()
                         },
                         loadingFinished = {}
                     )
@@ -233,6 +263,7 @@ class DayViewModel @Inject constructor(
                     macroData = updatedMacroData,
                     nutritionList = currentNutrition.toList()
                 )
+                persistMeals()
             }
         }
     }
@@ -335,6 +366,23 @@ class DayViewModel @Inject constructor(
                 profileRepository.addDailyEntry(dailyEntry)
             } catch (e: Exception) {
                 // Handle error silently
+            }
+        }
+    }
+
+    private fun observeMacroRecommendations() {
+        viewModelScope.launch {
+            profileRepository.macroRecommendationFlow().collect { recommendation ->
+                val currentState = _uiState.value
+                if (currentState is DayUiState.Success && recommendation != null) {
+                    val updatedMacroData = currentState.macroData.copy(
+                        caloriesGoal = recommendation.calories,
+                        proteinGoal = recommendation.protein,
+                        fatGoal = recommendation.fat,
+                        carbsGoal = recommendation.carbs
+                    )
+                    _uiState.value = currentState.copy(macroData = updatedMacroData)
+                }
             }
         }
     }

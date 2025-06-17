@@ -9,11 +9,8 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.res.stringResource
 import com.austral.nutri_planner_ts.R
 import com.austral.nutri_planner_ts.ui.theme.Dimensions
@@ -59,41 +56,7 @@ fun ProfileOptionsSection(
                 onClick = onEditProfile
             )
             
-            Divider(
-                modifier = Modifier.padding(vertical = Dimensions.SpacerSmall),
-                color = MaterialTheme.colorScheme.onSecondary.copy(alpha = 0.2f)
-            )
-            
-            ProfileOption(
-                icon = Icons.Default.Settings,
-                title = stringResource(R.string.profile_option_settings_title),
-                subtitle = stringResource(R.string.profile_option_settings_subtitle),
-                onClick = onSettings
-            )
-            
-            Divider(
-                modifier = Modifier.padding(vertical = Dimensions.SpacerSmall),
-                color = MaterialTheme.colorScheme.onSecondary.copy(alpha = 0.2f)
-            )
-            
-            ProfileOption(
-                icon = Icons.Default.Phone,
-                title = stringResource(R.string.profile_option_help_title),
-                subtitle = stringResource(R.string.profile_option_help_subtitle),
-                onClick = onHelp
-            )
-            
-            Divider(
-                modifier = Modifier.padding(vertical = Dimensions.SpacerSmall),
-                color = MaterialTheme.colorScheme.onSecondary.copy(alpha = 0.2f)
-            )
-            
-            ProfileOption(
-                icon = Icons.Default.Info,
-                title = stringResource(R.string.profile_option_about_title),
-                subtitle = stringResource(R.string.profile_option_about_subtitle),
-                onClick = onAbout
-            )
+            // No more options below.
         }
     }
 }
@@ -110,7 +73,7 @@ private fun ProfileOption(
         modifier = modifier
             .fillMaxWidth()
             .clickable { onClick() }
-            .padding(vertical = 8.dp),
+            .padding(vertical = Dimensions.SpacerSmall),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(

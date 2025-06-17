@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">nutri-planner-TS</string>
+    <string name="app_name">Nutri Planner</string>
+    <string name="app_name_display">Nutri Planner</string>
+    <!-- Web client ID obtained from Firebase console (OAuth 2.0 Client ID of type WEB) -->
+    <string name="google_server_id">906915400849-kldf8je4oh2b9qghhgdi7p3dit7dmihu.apps.googleusercontent.com</string>
 
     <!-- MacroSummary Strings -->
     <string name="calories_label">Calories</string>
@@ -35,6 +38,8 @@
     <string name="button_search">Search</string>
     <string name="button_retry">Retry</string>
     <string name="button_close">Close</string>
+    <string name="button_sign_out">Sign out</string>
+    <string name="button_continue_google">Continue with Google</string>
 
     <!-- Content Descriptions -->
     <string name="content_description_close">Close</string>
@@ -192,4 +197,22 @@
     
     <!-- Macro Recommendation Explanation -->
     <string name="macro_recommendation_explanation">Based on your profile, here are your recommended daily intake values. This calculation uses the Mifflin-St Jeor equation for BMR and adjusts for your activity level and goals.</string>
+
+    <string name="login_welcome">Welcome! \n\nSign in with your Google account to continue.</string>
+
+    <string name="error_toast_general">Error: %1$s</string>
+    <string name="authenticate_biometrics">Biometric authentication...</string>
+    <string name="greeting_hello_name">Hello %1$s!</string>
+
+    <string name="biometric_prompt_title">Biometric Authentication</string>
+    <string name="biometric_prompt_subtitle">Log in using your biometric credentials</string>
+
+    <!-- Added for Macro Goals Card -->
+    <string name="macro_goals_title">Daily goals</string>
+    <string name="target_weight_label">Target weight</string>
+
+    <!-- Notification strings -->
+    <string name="notification_default_message">See you on Nutri Planner</string>
+    <string name="notification_channel_name">Nutri Planner Alerts</string>
+    <string name="notification_channel_description">Reminders and alerts from Nutri Planner</string>
 </resources>

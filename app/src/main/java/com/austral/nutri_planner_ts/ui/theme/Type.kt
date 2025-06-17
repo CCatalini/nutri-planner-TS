@@ -14,7 +14,7 @@ val Typography = Typography(
 
     //  Small Style
     titleSmall = TextStyle(
-        fontSize = Dimensions.FontSmall,
+        fontSize = Dimensions.FontTitleButton,
         fontWeight = FontWeight(500),
     ),
     bodySmall = TextStyle(
@@ -24,7 +24,7 @@ val Typography = Typography(
 
     // Medium style
     titleMedium = TextStyle(
-        fontSize = Dimensions.FontMedium,
+        fontSize = Dimensions.FontSubtitle,
         fontWeight = FontWeight(500),
     ),
     bodyMedium = TextStyle(
@@ -34,7 +34,7 @@ val Typography = Typography(
 
     // Large Style
     titleLarge = TextStyle(
-        fontSize = Dimensions.FontLarge,
+        fontSize = Dimensions.FontTitle,
         fontWeight = FontWeight(500),
     ),
     bodyLarge = TextStyle(

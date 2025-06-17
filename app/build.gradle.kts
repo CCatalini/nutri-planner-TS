@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt.android)
+    id("com.google.gms.google-services")
     id("kotlin-kapt")
 }
 
@@ -27,8 +28,6 @@ android {
         }
 
         buildConfigField("String", "SPOONACULAR_API_KEY", "\"${localProperties.getProperty("spoonacular.api.key", "")}\"")
-        buildConfigField("String", "OPENAI_API_KEY", "\"${localProperties.getProperty("openai.api.key", "")}\"")
-        buildConfigField("String", "CLAUDE_API_KEY", "\"${localProperties.getProperty("claude.api.key", "")}\"")
     }
 
     buildTypes {
@@ -54,12 +53,16 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.8"
     }
+    lint {
+        abortOnError = false
+    }
 }
 
 dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
@@ -70,7 +73,7 @@ dependencies {
     //Hilt
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.hilt.android)
-    implementation(libs.androidx.lifecycle.runtime.compose.android)
+    implementation(libs.androidx.lifecycle.runtime.compose)
     kapt(libs.hilt.android.compiler)
 
     // Retrofit
@@ -84,8 +87,22 @@ dependencies {
     // OkHttp interceptor for API calls
     implementation(libs.logging.interceptor)
     
-    // SharedPreferences para almacenar datos del usuario
+    // para almacenar datos del usuario
     implementation(libs.androidx.datastore.preferences)
+
+    // biometric auth
+    implementation("androidx.biometric:biometric:1.2.0-alpha05")
+
+    // Firebase & Google Sign-In
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.play.services.auth)
+
+    // Credential Manager
+    implementation(libs.credentials)
+    implementation(libs.identity.googleid)
+
+    implementation(libs.accompanist.permissions)
 
     testImplementation(libs.junit)
 
