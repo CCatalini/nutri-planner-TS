@@ -67,9 +67,9 @@ fun MacrosSummary(macroData: MacroData = MacroData()) {
                 
                 CircularProgressIndicator(
                     progress = { caloriesProgress.coerceAtMost(1f) },
-                    color = if (isCaloriesOverGoal) Color.Red else MaterialTheme.colorScheme.primary,
+                    color = if (isCaloriesOverGoal) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
                     trackColor = if (isCaloriesOverGoal) 
-                        Color.Red.copy(alpha = 0.2f) 
+                        MaterialTheme.colorScheme.error.copy(alpha = 0.2f) 
                     else 
                         MaterialTheme.colorScheme.primary.copy(alpha = 0.2f),
                     strokeWidth = Dimensions.HeightMedium,
@@ -77,9 +77,13 @@ fun MacrosSummary(macroData: MacroData = MacroData()) {
                 )
                 Spacer(modifier = Modifier.height(Dimensions.SpacerMedium))
                 Text(
-                    text = "${macroData.caloriesConsumed} / ${macroData.caloriesGoal}",
+                    text = stringResource(
+                        R.string.macro_detail_kcal_format,
+                        macroData.caloriesConsumed,
+                        macroData.caloriesGoal
+                    ),
                     style = MaterialTheme.typography.bodyLarge,
-                    color = if (isCaloriesOverGoal) Color.Red else MaterialTheme.colorScheme.onBackground,
+                    color = if (isCaloriesOverGoal) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onBackground,
                     textAlign = TextAlign.Center
                 )
                 Spacer(modifier = Modifier.height(Dimensions.SpacerSmall))
@@ -143,7 +147,11 @@ fun MacroProgressBar(
                 color = MaterialTheme.colorScheme.onBackground
             )
             Text(
-                text = "$value / $goal g",
+                text = stringResource(
+                    R.string.macro_detail_gram_format,
+                    value,
+                    goal
+                ),
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onBackground
             )

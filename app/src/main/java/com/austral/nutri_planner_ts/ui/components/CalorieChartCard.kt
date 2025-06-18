@@ -158,6 +158,8 @@ private fun CalorieChart(
 
     val primaryColor = MaterialTheme.colorScheme.primary
     val lineColor = primaryColor.copy(alpha = 0.5f)
+    // Pre-compute colors that rely on MaterialTheme as they cannot be accessed inside Canvas draw scope
+    val referenceLineColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f)
 
     Canvas(modifier = modifier.pointerInput(data) {
         detectTapGestures { offset ->
@@ -185,7 +187,7 @@ private fun CalorieChart(
         yLines.forEach { value ->
             val y = size.height - ((value - minCalories) / range) * size.height
             drawLine(
-                color = Color.LightGray.copy(alpha = 0.3f),
+                color = referenceLineColor,
                 start = Offset(0f, y),
                 end = Offset(size.width, y),
                 strokeWidth = Dimensions.fineLine.toPx(),
@@ -232,10 +234,38 @@ private fun MacroDetailsContent(entry: DailyEntry) {
             fontWeight = FontWeight.Bold
         )
         Divider()
-        MacroRow(label = stringResource(R.string.calories_label), value = "${entry.consumedCalories} / ${entry.recommendedCalories} kcal")
-        MacroRow(label = stringResource(R.string.protein_label), value = "${entry.consumedProtein} / ${entry.recommendedProtein} g")
-        MacroRow(label = stringResource(R.string.carbs_label), value = "${entry.consumedCarbs} / ${entry.recommendedCarbs} g")
-        MacroRow(label = stringResource(R.string.fat_label), value = "${entry.consumedFat} / ${entry.recommendedFat} g")
+        MacroRow(
+            label = stringResource(R.string.calories_label),
+            value = stringResource(
+                R.string.macro_detail_kcal_format,
+                entry.consumedCalories,
+                entry.recommendedCalories
+            )
+        )
+        MacroRow(
+            label = stringResource(R.string.protein_label),
+            value = stringResource(
+                R.string.macro_detail_gram_format,
+                entry.consumedProtein,
+                entry.recommendedProtein
+            )
+        )
+        MacroRow(
+            label = stringResource(R.string.carbs_label),
+            value = stringResource(
+                R.string.macro_detail_gram_format,
+                entry.consumedCarbs,
+                entry.recommendedCarbs
+            )
+        )
+        MacroRow(
+            label = stringResource(R.string.fat_label),
+            value = stringResource(
+                R.string.macro_detail_gram_format,
+                entry.consumedFat,
+                entry.recommendedFat
+            )
+        )
         Spacer(modifier = Modifier.height(Dimensions.SpacerLarge))
     }
 }

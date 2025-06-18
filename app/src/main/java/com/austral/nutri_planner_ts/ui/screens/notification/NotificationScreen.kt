@@ -13,12 +13,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.compose.ui.res.stringResource
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 import com.austral.nutri_planner_ts.notification.ScheduleNotificationViewModel
+import com.austral.nutri_planner_ts.R
+import com.austral.nutri_planner_ts.ui.theme.Dimensions
+import androidx.hilt.navigation.compose.hiltViewModel
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @OptIn(ExperimentalPermissionsApi::class)
@@ -38,16 +40,16 @@ fun NotificationScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
+            .padding(Dimensions.PaddingMedium),
+        verticalArrangement = Arrangement.spacedBy(Dimensions.SpacerMedium, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Button(onClick = { viewModel.scheduleOneTimeNotification() }) {
-            Text(text = "Programar notificación en 3 s")
+            Text(text = stringResource(R.string.schedule_notification_in_seconds, 3))
         }
 
         Button(onClick = { viewModel.scheduleDailyNotification() }) {
-            Text(text = "Programar notificación diaria 20:00")
+            Text(text = stringResource(R.string.schedule_daily_notification_at_time, "20:00"))
         }
     }
 } 

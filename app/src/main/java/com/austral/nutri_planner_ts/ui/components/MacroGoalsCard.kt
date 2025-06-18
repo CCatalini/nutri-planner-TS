@@ -57,7 +57,11 @@ fun MacroGoalsCard(
                         color = MaterialTheme.colorScheme.onSecondary
                     )
                     Text(
-                        text = "${targetWeight.toInt()} kg",
+                        text = stringResource(
+                            R.string.amount_unit_format,
+                            targetWeight.toInt().toString(),
+                            stringResource(R.string.unit_kilogram)
+                        ),
                         style = MaterialTheme.typography.bodyMedium,
                         fontWeight = FontWeight.SemiBold,
                         color = MaterialTheme.colorScheme.primary
@@ -65,10 +69,38 @@ fun MacroGoalsCard(
                 }
             }
 
-            GoalRow(label = stringResource(R.string.calories_label), value = "${recommendation.calories} kcal")
-            GoalRow(label = stringResource(R.string.protein_label), value = "${recommendation.protein} g")
-            GoalRow(label = stringResource(R.string.fat_label), value = "${recommendation.fat} g")
-            GoalRow(label = stringResource(R.string.carbs_label), value = "${recommendation.carbs} g")
+            GoalRow(
+                label = stringResource(R.string.calories_label),
+                value = stringResource(
+                    R.string.amount_unit_format,
+                    recommendation.calories.toString(),
+                    stringResource(R.string.unit_kcal)
+                )
+            )
+            GoalRow(
+                label = stringResource(R.string.protein_label),
+                value = stringResource(
+                    R.string.amount_unit_format,
+                    recommendation.protein.toString(),
+                    stringResource(R.string.unit_gram)
+                )
+            )
+            GoalRow(
+                label = stringResource(R.string.fat_label),
+                value = stringResource(
+                    R.string.amount_unit_format,
+                    recommendation.fat.toString(),
+                    stringResource(R.string.unit_gram)
+                )
+            )
+            GoalRow(
+                label = stringResource(R.string.carbs_label),
+                value = stringResource(
+                    R.string.amount_unit_format,
+                    recommendation.carbs.toString(),
+                    stringResource(R.string.unit_gram)
+                )
+            )
         }
     }
 }

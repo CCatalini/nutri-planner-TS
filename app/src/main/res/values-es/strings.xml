@@ -215,4 +215,17 @@
     <string name="notification_default_message">Te esperamos en Nutri Planner</string>
     <string name="notification_channel_name">Avisos de Nutri Planner</string>
     <string name="notification_channel_description">Recordatorios y avisos de Nutri Planner</string>
+
+    <!-- Units -->
+    <string name="unit_kcal">kcal</string>
+    <string name="unit_gram">g</string>
+    <string name="unit_kilogram">kg</string>
+
+    <!-- Notification -->
+    <string name="schedule_notification_in_seconds">Programar notificación en %1$d s</string>
+    <string name="schedule_daily_notification_at_time">Programar notificación diaria %1$s</string>
+
+    <!-- Macro detail value formats -->
+    <string name="macro_detail_kcal_format">%1$d / %2$d kcal</string>
+    <string name="macro_detail_gram_format">%1$d / %2$d g</string>
 </resources> 
